@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Smart Sales Tracker</string>
+    <string name="shop_details">Shop Details</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
+    <string name="splash_image">splash_image</string>
+    <string name="where_data_meets_sales">Where Data Meets Sales</string>
+    <string name="email">Email</string>
+    <string name="remember_me">Remember me</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="password">Password</string>
+    <string name="login_to_your_account">Login to your account</string>
+    <string name="already_have_an_account">Already have an account</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="let_s_get_started">Let\'s Get Started</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="full_name">Full Name</string>
+    <string name="phone_number">Phone Number</string>
+</resources>
