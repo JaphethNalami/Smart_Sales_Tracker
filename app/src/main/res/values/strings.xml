@@ -21,4 +21,18 @@
     <string name="create_an_account">Create an account</string>
     <string name="full_name">Full Name</string>
     <string name="phone_number">Phone Number</string>
+    <string name="image_logo">image_logo</string>
+    <string name="enter_your_email_address_below_to_request_a_password_reset_email">Enter your email address below to request a password reset email.</string>
+    <string name="request_email">Request Email</string>
+    <string name="password_reset">Password Reset</string>
+    <string name="back">Back</string>
+    <string name="submit">Submit</string>
+    <string name="fill_in_to_complete_setup">Fill in to complete setup</string>
+    <string name="shop_name">Shop Name</string>
+    <string name="shop_address">Shop Address</string>
+
+    <string-array name="shop_array">
+        <item>Retail</item>
+        <item>Wholesale</item>
+    </string-array>
 </resources>
