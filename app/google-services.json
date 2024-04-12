@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "926448825043",
+    "project_id": "smart-sales-tracker",
+    "storage_bucket": "smart-sales-tracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:926448825043:android:bee77e9ba0c42d98c15a26",
+        "android_client_info": {
+          "package_name": "com.example.smartsalestracker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWbzMYIyMiKv4IFqjM4Dc4yse8srU4Ue4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
