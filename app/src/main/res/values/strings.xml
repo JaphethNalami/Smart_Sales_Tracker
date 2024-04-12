@@ -40,6 +40,11 @@
     <string name="discard">Discard</string>
     <string name="add_item">Add Item</string>
     <string name="add_n_category">Add \n category</string>
+    <string name="identifier">identifier</string>
+    <string name="item_id">Item ID</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="manage_item">Manage Item</string>
 
     <string-array name="shop_array">
         <item>Retail</item>

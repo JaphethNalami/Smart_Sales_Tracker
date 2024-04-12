@@ -2,6 +2,14 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.SmartSalesTracker" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/light_blue</item>
+        <item name="colorPrimaryVariant">@color/light_blue</item>
+        <item name="android:statusBarColor">@color/light_blue</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        //card colour in dark mode
+
+
+
     </style>
 </resources>

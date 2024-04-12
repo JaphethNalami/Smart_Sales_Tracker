@@ -7,12 +7,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_vertical"
-    android:background="@color/white"
     tools:context=".Sign_In">
 
     <ImageView
-        android:layout_width="match_parent"
+        android:layout_width="385dp"
         android:layout_height="180dp"
+        android:layout_gravity="center"
         android:contentDescription="@string/splash_image"
         android:scaleType="centerCrop"
         android:src="@drawable/growing" />

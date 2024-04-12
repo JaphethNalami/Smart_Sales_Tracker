@@ -90,7 +90,7 @@ public class Item_Add extends AppCompatActivity {
         //dialog to show progress
         dialog = new MaterialAlertDialogBuilder(this)
                 .setView(new ProgressBar(this))
-                .setTitle("Finishing up")
+                .setTitle("Saving item")
                 .setMessage("Please wait")
                 .create();
 
@@ -105,9 +105,8 @@ public class Item_Add extends AppCompatActivity {
                         .start()
         );
 
-        //category method
-       // Categories();
-
+        mAuth = FirebaseAuth.getInstance();
+        Categories();
 
         scanBarcode.setOnClickListener(v -> {
             //scan barcode
@@ -122,21 +121,19 @@ public class Item_Add extends AppCompatActivity {
             String bar = itemBarcode.getText().toString();
 
             //save details to firestore
-            if (imageUri != null) {
+            if (name.isEmpty() || price.isEmpty() || quantity.isEmpty() || bar.isEmpty() || imageUri == null) {
+                Toast.makeText(Item_Add.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }else
+             {
                uploadProfilePicture(imageUri);
-            }
-            else if (name.isEmpty() || price.isEmpty() || quantity.isEmpty() || bar.isEmpty()) {
-                    Toast.makeText(Item_Add.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                }
-            else {
-                Toast.makeText(Item_Add.this, "Please select an image", Toast.LENGTH_SHORT).show();
             }
 
         });
 
         discard.setOnClickListener(v -> {
-            //move to items activity
+            //move to item add activity
+            startActivity(new Intent(Item_Add.this, Item_Add.class));
 
         });
 
@@ -148,7 +145,7 @@ public class Item_Add extends AppCompatActivity {
 
     }
 
-    // Get categories from Firestore
+    // Get categories from Fire_store
     private void Categories() {
         FirebaseUser user1 = mAuth.getCurrentUser();
         String user2 = user1.getUid();
@@ -304,8 +301,6 @@ public class Item_Add extends AppCompatActivity {
                         Toast.makeText(Item_Add.this, "Error adding item", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     });
-
-
 
     }
 
