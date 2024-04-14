@@ -45,6 +45,9 @@
     <string name="update">Update</string>
     <string name="delete">Delete</string>
     <string name="manage_item">Manage Item</string>
+    <string name="welcome">WELCOME</string>
+    <string name="logout_button">logout button</string>
+    <string name="profile_button">profile button</string>
 
     <string-array name="shop_array">
         <item>Retail</item>

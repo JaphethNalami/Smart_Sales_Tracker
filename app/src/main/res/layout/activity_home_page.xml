@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Home_Page">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/full_name"
+        android:textSize="20sp"
+        android:id="@+id/user"
+        android:layout_marginStart="13dp"
+        android:layout_below="@+id/textView2"
+        />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logout"
+        android:id="@+id/logout"
+        android:contentDescription="@string/logout_button"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/icon_design"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="13dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/linear_layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/user"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="13dp"
+        >
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/profile_icon"
+        android:id="@+id/profile"
+        android:contentDescription="@string/profile_button"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/icon_design"
+        />
+
+        <SearchView
+            android:id="@+id/search"
+            android:layout_width="272dp"
+            android:layout_height="43dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/icon_design"
+            android:iconifiedByDefault="false"
+            android:queryHint="Search Items" />
+
+        <ImageButton
+            android:id="@+id/cart1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_design"
+            android:src="@drawable/shopping_cart" />
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_layout1"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="5dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="10dp">
+
+            <Button
+                android:id="@+id/food"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Food"
+                android:layout_marginStart="4dp"
+                android:background="@drawable/button_shape"
+                android:textColor="@color/white"
+                android:layout_marginEnd="5dp"/>
+
+            <Button
+                android:id="@+id/clothes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Clothes"
+                android:background="@drawable/button_shape"
+                android:textColor="@color/white"
+                android:layout_marginEnd="5dp"/>
+
+            <Button
+                android:id="@+id/electronics"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Electronics"
+                android:background="@drawable/button_shape"
+                android:textColor="@color/white"
+                android:layout_marginEnd="5dp"/>
+
+            <Button
+                android:id="@+id/other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Other"
+                android:background="@drawable/button_shape"
+                android:textColor="@color/white"
+                android:layout_marginEnd="5dp"/>
+
+            <Button
+                android:id="@+id/motor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Motorist"
+                android:background="@drawable/button_shape"
+                android:textColor="@color/white"
+                android:layout_marginEnd="5dp"/>
+
+            <Button
+                android:id="@+id/books"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Books"
+                android:background="@drawable/button_shape"
+                android:textColor="@color/white"
+                android:layout_marginEnd="5dp"/>
+
+            <Button
+                android:id="@+id/houses"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Houses"
+                android:background="@drawable/button_shape"
+                android:textColor="@color/white"
+                android:layout_marginEnd="5dp"/>
+
+
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/horizontalScrollView"
+        android:text="Select item to continue"
+        android:textSize="20sp"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="13dp"
+        />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="13dp"
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
+        android:layout_marginBottom="10dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        android:layout_below="@+id/textView"
+        app:spanCount="3"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:src="@drawable/baseline_add_24"
+        app:backgroundTint="@color/light_blue"
+        app:fabSize="normal"
+        android:id="@+id/add"
+        />
+    </RelativeLayout>
+
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

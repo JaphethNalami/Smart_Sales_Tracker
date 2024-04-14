@@ -20,6 +20,9 @@
         android:theme="@style/Theme.SmartSalesTracker"
         tools:targetApi="31">
         <activity
+            android:name=".Home_Page"
+            android:exported="false" />
+        <activity
             android:name=".Item_Update"
             android:exported="false" />
         <activity

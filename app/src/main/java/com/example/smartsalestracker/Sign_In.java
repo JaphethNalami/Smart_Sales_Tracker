@@ -56,7 +56,7 @@ public class Sign_In extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            startActivity(new Intent(Sign_In.this, Item_Add.class));
+            startActivity(new Intent(Sign_In.this, Home_Page.class));
 
         }
     }
@@ -114,7 +114,7 @@ public class Sign_In extends AppCompatActivity {
                                 dialog.dismiss();
                                 // Sign in success, update UI with the signed-in user's information
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                startActivity(new Intent(Sign_In.this, Sign_Up.class));
+                                startActivity(new Intent(Sign_In.this, Home_Page.class));
                             } else {
                                 dialog.dismiss();
                                 // If sign in fails, display a message to the user.
