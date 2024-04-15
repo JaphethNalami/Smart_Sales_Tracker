@@ -1,13 +1,9 @@
 package com.example.smartsalestracker;
 
-import static androidx.core.content.PackageManagerCompat.LOG_TAG;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
@@ -116,7 +112,7 @@ public class Home_Page extends AppCompatActivity {
 
         // Cart button
         btn_cart.setOnClickListener(v -> {
-           // startActivity(new Intent(Home_Page.this, Cart.class));
+            startActivity(new Intent(Home_Page.this, Items_Cart.class));
         });
 
         // call method for search on click
