@@ -48,6 +48,11 @@
     <string name="welcome">WELCOME</string>
     <string name="logout_button">logout button</string>
     <string name="profile_button">profile button</string>
+    <string name="refresh_button">Refresh button</string>
+    <string name="back_button">Back button</string>
+    <string name="add_quantity">Add quantity</string>
+    <string name="update_item">Update Item</string>
+    <string name="_0">0</string>
 
     <string-array name="shop_array">
         <item>Retail</item>

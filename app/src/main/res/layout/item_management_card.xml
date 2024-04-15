@@ -6,8 +6,8 @@
     android:layout_margin="5dp"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="2dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     >
@@ -20,8 +20,10 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/user_card_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="1dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
             android:src="@drawable/blue_circle" />
 
@@ -41,6 +43,7 @@
                 android:textColor="@color/blue" />
 
             <TextView
+                android:paddingStart="10dp"
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -52,6 +55,7 @@
                 android:textColor="@color/blue" />
 
             <TextView
+                android:paddingStart="10dp"
                 android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -79,6 +83,7 @@
                     android:text="@string/quantity" />
 
                 <TextView
+                    android:paddingStart="10dp"
                     android:id="@+id/quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -98,6 +103,7 @@
                     android:text="@string/category" />
 
                 <TextView
+                    android:paddingStart="10dp"
                     android:id="@+id/category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -117,6 +123,7 @@
                     android:text="@string/identifier" />
 
                 <TextView
+                    android:paddingStart="10dp"
                     android:id="@+id/id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -136,6 +143,7 @@
                     android:text="@string/barcode" />
 
                 <TextView
+                    android:paddingStart="10dp"
                     android:id="@+id/barcode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

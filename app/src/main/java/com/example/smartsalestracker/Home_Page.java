@@ -111,7 +111,7 @@ public class Home_Page extends AppCompatActivity {
 
         // Profile button
         btn_profile.setOnClickListener(v -> {
-           // startActivity(new Intent(Home_Page.this, Profile.class));
+            startActivity(new Intent(Home_Page.this, Item_Management.class));
         });
 
         // Cart button
