@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:layout_marginTop="3dp"
+    android:layout_marginBottom="1dp"
+    android:layout_marginLeft="2dp"
+    android:background="@drawable/card_design"
+    android:layout_marginRight="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/item_card_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:src="@drawable/blue_circle"
+            android:background="@drawable/image_design"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_name"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:textSize="15sp"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"
+             />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/reduce_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/reduce_icon"
+            android:background="@color/container"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginEnd="5dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/reduce"
+            />
+
+        <TextView
+            android:id="@+id/count_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="33"
+            android:background="@color/container"
+            />
+
+        <ImageButton
+            android:id="@+id/increment_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/increment_icon"
+            android:background="@color/container"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginEnd="5dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/increment"
+            />
+        </LinearLayout>
+        </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            android:layout_marginTop="4dp" />
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/id"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            android:layout_marginTop="4dp" />
+        <TextView
+            android:id="@+id/quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/category"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            android:layout_marginTop="2dp" />
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/price"
+            android:visibility="gone"
+            android:textColor="@color/blue"
+            android:textSize="17sp" />
+
+        <ImageButton
+            android:id="@+id/delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/delete_icon"
+           android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="2dp"
+            android:contentDescription="@string/delete"
+            />
+
+        <TextView
+            android:id="@+id/item_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/delete_button"
+            android:text="44"
+            android:drawableStart="@drawable/money_icon"
+            android:textSize="20sp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="7dp" />
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

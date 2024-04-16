@@ -1,6 +1,7 @@
 package com.example.smartsalestracker;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -27,6 +29,7 @@ public class Sign_In extends AppCompatActivity {
     Button sign_in;
     TextView sign_up, forgot_password;
     CheckBox remember_me;
+
 
     //firebase authentication declaration
     private FirebaseAuth mAuth;
@@ -71,6 +74,8 @@ public class Sign_In extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        FirebaseApp.initializeApp(this);
 
         //views binding
         email = findViewById(R.id.email_edit_text);

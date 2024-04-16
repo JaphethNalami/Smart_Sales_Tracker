@@ -1,11 +1,11 @@
 package com.example.smartsalestracker;
 
 public class Product {
-    String name, image, price, quantity,barcode, itemId, category;
+    String name, image, price, quantity,barcode, itemId, category,itemTotal,totalAmount,itemCount;
 
     public Product() {}
 
-    public Product(String name, String image, String price, String quantity, String barcode, String itemId, String category) {
+    public Product(String name, String image, String price, String quantity, String barcode, String itemId, String category, String itemTotal, String totalAmount, String itemCount) {
         this.name = name;
         this.image = image;
         this.price = price;
@@ -13,6 +13,10 @@ public class Product {
         this.barcode = barcode;
         this.itemId = itemId;
         this.category = category;
+        this.itemTotal = itemTotal;
+        this.totalAmount = totalAmount;
+        this.itemCount = itemCount;
+
 
     }
 
@@ -71,5 +75,31 @@ public class Product {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    public String getItemTotal() {
+        return itemTotal;
+    }
+
+    public void setItemTotal(String itemTotal) {
+        this.itemTotal = itemTotal;
+    }
+
+    public String getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(String totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+
+    public String getItemCount() {
+        return itemCount;
+    }
+
+    public void setItemCount(String itemCount) {
+        this.itemCount = itemCount;
+    }
+
 
 }

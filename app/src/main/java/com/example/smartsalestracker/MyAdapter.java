@@ -99,16 +99,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ProductViewHolder>
                 countTextView.setText(String.valueOf(count));
             }
 
-            // Add the selected product to the cart
-            Product_Cart.getInstance().addToCart(product, count);
-
-            // Calculate total
+            //calculate the total price for each selected product
             double total = 0;
-            for (Map.Entry<Product, Integer> entry : Product_Cart.getInstance().getSelectedProducts().entrySet()) {
+            for (Map.Entry<Product, Integer> entry : countMap.entrySet()) {
                 Product p = entry.getKey();
                 int selectedCount = entry.getValue();
                 total += selectedCount * Double.parseDouble(p.price);
             }
+
+            // Add the selected product to the cart
+            product.setItemTotal(String.valueOf(Double.parseDouble(product.price) * count));
+            product.setItemCount(String.valueOf(count));
+            Product_Cart.getInstance().addToCart(product, count);
 
             // Display total in a toast
             Toast.makeText(v.getContext(), "Total: " + total, Toast.LENGTH_SHORT).show();

@@ -1,11 +1,14 @@
 package com.example.smartsalestracker;
 
+import android.widget.Toast;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Product_Cart {
     private static Product_Cart instance;
-    private HashMap<Product, Integer> selectedProducts;
+    private static HashMap<Product, Integer> selectedProducts;
 
     private Product_Cart() {
         selectedProducts = new HashMap<>();
@@ -24,6 +27,7 @@ public class Product_Cart {
 
     public void removeFromCart(Product product) {
         selectedProducts.remove(product);
+
     }
 
     public int getProductCount(Product product) {
@@ -34,4 +38,3 @@ public class Product_Cart {
         return selectedProducts;
     }
 }
-

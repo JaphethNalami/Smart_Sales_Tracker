@@ -53,6 +53,12 @@
     <string name="add_quantity">Add quantity</string>
     <string name="update_item">Update Item</string>
     <string name="_0">0</string>
+    <string name="reduce">reduce</string>
+    <string name="increment">increment</string>
+    <string name="my_cart">My Cart</string>
+    <string name="checkout">Checkout</string>
+    <string name="total_amount">Total Amount:</string>
+    <string name="clear">Clear</string>
 
     <string-array name="shop_array">
         <item>Retail</item>
