@@ -17,7 +17,7 @@ import java.util.Map;
 public class Items_Cart extends AppCompatActivity {
 
     ImageButton back;
-    TextView clear_cart, total_price;
+   static TextView clear_cart, total_price;
     Button checkout;
     RecyclerView recyclerView;
     CartAdapter cartAdapter;
@@ -80,6 +80,7 @@ public class Items_Cart extends AppCompatActivity {
             String totalPrice3 = String.valueOf(totalPrice2);
             total_price.setText(totalPrice3);
         });
+
 
     }
 }

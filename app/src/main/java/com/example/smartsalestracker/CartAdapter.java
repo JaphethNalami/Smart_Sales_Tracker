@@ -1,6 +1,7 @@
 package com.example.smartsalestracker;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,6 +117,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
                 Product_Cart.getInstance().removeFromCart(deletedProduct);
                 Toast.makeText(v.getContext(), cardItem.getName()+" removed from cart", Toast.LENGTH_SHORT).show();
             }
+        });
+
+        //set click for clear cat in the items cart page
+        Items_Cart.clear_cart.setOnClickListener(v -> {
+            // Clear the cart
+            Product_Cart.getInstance().getSelectedProducts().clear();
+            notifyDataSetChanged();
+            //move to the home page
+            context.startActivity(new Intent(context, Home_Page.class));
+
         });
 
     }
