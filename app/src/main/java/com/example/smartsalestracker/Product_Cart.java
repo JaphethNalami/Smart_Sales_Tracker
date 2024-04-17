@@ -3,7 +3,6 @@ package com.example.smartsalestracker;
 import android.widget.Toast;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Product_Cart {
@@ -22,12 +21,18 @@ public class Product_Cart {
     }
 
     public void addToCart(Product product, int count) {
-        selectedProducts.put(product, count);
+        // Check if the product already exists in the cart
+        if (!selectedProducts.containsKey(product)) {
+            selectedProducts.put(product, count);
+        } else {
+            // If the product exists, update the count
+            int currentCount = selectedProducts.get(product);
+            selectedProducts.put(product, currentCount);
+        }
     }
 
     public void removeFromCart(Product product) {
         selectedProducts.remove(product);
-
     }
 
     public int getProductCount(Product product) {
@@ -37,4 +42,16 @@ public class Product_Cart {
     public Map<Product, Integer> getSelectedProducts() {
         return selectedProducts;
     }
+
+    public double calculateTotalPrice() {
+        double totalPrice = 0;
+        for (Map.Entry<Product, Integer> entry : selectedProducts.entrySet()) {
+            Product product = entry.getKey();
+            totalPrice += Double.parseDouble(product.getItemTotal());
+        }
+        return totalPrice;
+    }
+
+
+
 }

@@ -49,14 +49,59 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
         holder.reduceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle reduce button click
+                // get curent value of itemcount
+                String count1 = cardItem.getItemCount();
+                String itemprice = cardItem.getPrice();
+                // decrement the value
+                int count = Integer.parseInt(count1);
+                int price = Integer.parseInt(itemprice);
+                if (count > 1) {
+                    count--;
+                    // set the new value
+                    cardItem.setItemCount(String.valueOf(count));
+                    holder.countTextView.setText(String.valueOf(count));
+                    // update the total
+                    cardItem.setItemTotal(String.valueOf(count*price));
+                    holder.itemTotalTextView.setText(String.valueOf(count*price));
+                    // update the cart
+                    Product_Cart.getInstance().addToCart(cardItem, count);
+                    //toast name of item removed
+                    Toast.makeText(v.getContext(), cardItem.getName()+" reduced to" + count, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(v.getContext(), "Item count cannot be less than 1", Toast.LENGTH_SHORT).show();
             }
+        }
         });
 
         holder.incrementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle increment button click
+                // get curent value of itemcount
+                String count1 = cardItem.getItemCount();
+                String itemprice = cardItem.getPrice();
+                //get quantity of item
+                String quantity = cardItem.getQuantity();
+
+                // increment the value
+                int quantity1 = Integer.parseInt(quantity);
+                int count = Integer.parseInt(count1);
+                int price = Integer.parseInt(itemprice);
+                if (count < quantity1){
+                count++;
+                // set the new value
+                cardItem.setItemCount(String.valueOf(count));
+                holder.countTextView.setText(String.valueOf(count));
+                // update the total
+                cardItem.setItemTotal(String.valueOf(count*price));
+                holder.itemTotalTextView.setText(String.valueOf(count*price));
+                // update the cart
+                Product_Cart.getInstance().addToCart(cardItem, count);
+                //toast name of item added
+                Toast.makeText(v.getContext(), cardItem.getName()+" incremented to" + count, Toast.LENGTH_SHORT).show();
+            }
+                else {
+                    Toast.makeText(v.getContext(), "No more"+cardItem.getName()+"available", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -72,6 +117,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
                 Toast.makeText(v.getContext(), cardItem.getName()+" removed from cart", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)

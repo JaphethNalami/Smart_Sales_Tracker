@@ -42,6 +42,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ProductViewHolder>
         Product product = productArrayList.get(position);
         holder.productName.setText(product.name);
         holder.productPrice.setText(product.price);
+        holder.categoryTextView.setText(product.category);
+        holder.itemIdTextView.setText(product.itemId);
+        holder.itemQuantityTextView.setText(product.quantity);
         Glide.with(holder.itemView.getContext()).load(product.image).placeholder(R.drawable.blue_circle).into(holder.productImage);
 
         // Display the current count, or hide if count is zero
@@ -74,7 +77,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ProductViewHolder>
     public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView productImage;
-        TextView productName, productPrice, countTextView;
+        TextView productName, productPrice, countTextView,categoryTextView,itemIdTextView, itemQuantityTextView;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -82,22 +85,41 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ProductViewHolder>
             productName = itemView.findViewById(R.id.name);
             productPrice = itemView.findViewById(R.id.price);
             countTextView = itemView.findViewById(R.id.count_text_view);
+            categoryTextView = itemView.findViewById(R.id.category);
+            itemIdTextView = itemView.findViewById(R.id.id);
+            itemQuantityTextView = itemView.findViewById(R.id.quantity);
 
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
+            int quantity = Integer.parseInt(itemQuantityTextView.getText().toString());
+            if (quantity == 0) {
+                Toast.makeText(v.getContext(), "Out of stock", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             Product product = productArrayList.get(getAdapterPosition());
             int count = countMap.getOrDefault(product, 0) + 1;
 
-            if (count == 0) {
-                countTextView.setVisibility(View.GONE);
-            } else {
-                countTextView.setVisibility(View.VISIBLE);
-                countMap.put(product, count);
-                countTextView.setText(String.valueOf(count));
+            // Check if the quantity is not exceeded
+            if (count > quantity) {
+                Toast.makeText(v.getContext(), "No more " + productName.getText().toString()+" available", Toast.LENGTH_SHORT).show();
+                return;
             }
+            else {
+                if (count == 0) {
+                    countTextView.setVisibility(View.GONE);
+                } else {
+                    countTextView.setVisibility(View.VISIBLE);
+                    countMap.put(product, count);
+                    countTextView.setText(String.valueOf(count));
+                }
+
+            }
+
+
 
             //calculate the total price for each selected product
             double total = 0;

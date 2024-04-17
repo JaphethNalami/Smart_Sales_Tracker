@@ -64,6 +64,7 @@
             android:visibility="gone"
             android:gravity="center"
             android:text=""
+            android:textColor="@color/light_blue"
             android:textSize="36sp"
             android:background="@color/container"
             />
@@ -91,7 +92,6 @@
             android:layout_centerHorizontal="true"
             android:visibility="gone"
             android:layout_marginTop="2dp" />
-
 
     </RelativeLayout>
 

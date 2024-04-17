@@ -66,5 +66,20 @@ public class Items_Cart extends AppCompatActivity {
         // Set layout manager and adapter to the RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(cartAdapter);
+
+        // Calculate total price of all items in the cart
+        double totalPrice = Product_Cart.getInstance().calculateTotalPrice();
+        //convert the total price to string
+        String totalPrice1 = String.valueOf(totalPrice);
+
+        total_price.setText(totalPrice1);
+
+        //set click listener for the total price text view to reload the value
+        total_price.setOnClickListener(v -> {
+            double totalPrice2 = Product_Cart.getInstance().calculateTotalPrice();
+            String totalPrice3 = String.valueOf(totalPrice2);
+            total_price.setText(totalPrice3);
+        });
+
     }
 }
