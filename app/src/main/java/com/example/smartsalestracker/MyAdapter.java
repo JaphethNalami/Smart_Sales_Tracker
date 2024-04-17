@@ -134,8 +134,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ProductViewHolder>
             product.setItemCount(String.valueOf(count));
             Product_Cart.getInstance().addToCart(product, count);
 
-            // Display total in a toast
-            Toast.makeText(v.getContext(), "Total: " + total, Toast.LENGTH_SHORT).show();
+            // Display total in the Home_Page
+            Home_Page.current_total1.setVisibility(View.VISIBLE);
+            Home_Page.current_total1.setText("Total$: " + total);
+
 
             //enable display of cart count
             Home_Page.cart_count.setVisibility(View.VISIBLE);

@@ -41,7 +41,7 @@ public class Home_Page extends AppCompatActivity {
     private FirebaseAuth mAuth;
     ImageButton btn_profile,btn_cart,btn_logout;
     TextView username;
-    static TextView cart_count;
+    static TextView cart_count,current_total1;
 
     Dialog dialog;
     private FloatingActionButton add;
@@ -89,6 +89,7 @@ public class Home_Page extends AppCompatActivity {
         searchView = findViewById(R.id.search);
         mySwipeRefreshLayout = findViewById(R.id.main);
         cart_count = findViewById(R.id.cart_count);
+        current_total1 = findViewById(R.id.current_total);
 
         // Add button
         add.setOnClickListener(v -> {
@@ -112,6 +113,12 @@ public class Home_Page extends AppCompatActivity {
         btn_cart.setOnClickListener(v -> {
             startActivity(new Intent(Home_Page.this, Items_Cart.class));
         });
+
+        //current count textview
+        current_total1.setOnClickListener(v -> {
+            startActivity(new Intent(Home_Page.this, Items_Cart.class));
+        });
+
 
         // call method for search on click
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

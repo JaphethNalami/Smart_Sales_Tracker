@@ -8,16 +8,15 @@
     tools:context=".Items_Cart">
 
     <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="15dp"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/baseline_arrow_back_24"
         android:id="@+id/back_button"
+        android:layout_width="66dp"
+        android:layout_height="53dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="10dp"
         android:contentDescription="@string/back_button"
-       />
+        android:src="@drawable/baseline_arrow_back_24" />
 
     <TextView
         android:id="@+id/cart_title"
@@ -26,9 +25,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="15dp"
         android:text="@string/my_cart"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         android:layout_below="@+id/back_button"
         />
 
@@ -75,14 +73,13 @@
             android:text="@string/total_amount"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
             />
 
 <TextView
     android:id="@+id/total_amount"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="200"
+    android:text="@string/_0_0"
     android:drawableStart="@drawable/money_icon"
     android:textSize="20sp"
     android:textStyle="bold"

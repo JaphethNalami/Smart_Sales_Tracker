@@ -211,6 +211,22 @@
         app:spanCount="3"
         />
 
+        <TextView
+            android:id="@+id/current_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/add"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="6dp"
+            android:visibility="gone"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@drawable/button_shape"
+            android:textSize="20sp"
+            android:text="@string/_0_0" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

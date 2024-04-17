@@ -64,9 +64,9 @@
             android:visibility="gone"
             android:gravity="center"
             android:text=""
-            android:textColor="@color/light_blue"
+            android:textColor="@color/white"
             android:textSize="36sp"
-            android:background="@color/container"
+            android:background="@drawable/count_background"
             />
         <TextView
             android:id="@+id/id"
