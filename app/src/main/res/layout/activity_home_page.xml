@@ -44,6 +44,17 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="13dp"
         />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/cart_count"
+            android:layout_alignTop="@+id/linear_layout1"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="30dp"
+            android:textColor="@color/red"
+            android:visibility="gone"
+            />
 
     <LinearLayout
         android:id="@+id/linear_layout1"
@@ -56,6 +67,7 @@
         android:layout_marginStart="13dp"
         android:layout_marginEnd="13dp"
         >
+
 
     <ImageButton
         android:layout_width="wrap_content"

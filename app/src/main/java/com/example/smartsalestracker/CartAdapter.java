@@ -49,12 +49,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
         holder.reduceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // get curent value of itemcount
+                // get current value of item count
                 String count1 = cardItem.getItemCount();
-                String itemprice = cardItem.getPrice();
+                String item_price = cardItem.getPrice();
                 // decrement the value
                 int count = Integer.parseInt(count1);
-                int price = Integer.parseInt(itemprice);
+                int price = Integer.parseInt(item_price);
                 if (count > 1) {
                     count--;
                     // set the new value
@@ -76,16 +76,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
         holder.incrementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // get curent value of itemcount
+                // get current value of item count
                 String count1 = cardItem.getItemCount();
-                String itemprice = cardItem.getPrice();
+                String item_price = cardItem.getPrice();
                 //get quantity of item
                 String quantity = cardItem.getQuantity();
 
                 // increment the value
                 int quantity1 = Integer.parseInt(quantity);
                 int count = Integer.parseInt(count1);
-                int price = Integer.parseInt(itemprice);
+                int price = Integer.parseInt(item_price);
                 if (count < quantity1){
                 count++;
                 // set the new value

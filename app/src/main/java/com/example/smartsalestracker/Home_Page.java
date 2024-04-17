@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
@@ -40,6 +41,7 @@ public class Home_Page extends AppCompatActivity {
     private FirebaseAuth mAuth;
     ImageButton btn_profile,btn_cart,btn_logout;
     TextView username;
+    static TextView cart_count;
 
     Dialog dialog;
     private FloatingActionButton add;
@@ -86,6 +88,7 @@ public class Home_Page extends AppCompatActivity {
         add = findViewById(R.id.add);
         searchView = findViewById(R.id.search);
         mySwipeRefreshLayout = findViewById(R.id.main);
+        cart_count = findViewById(R.id.cart_count);
 
         // Add button
         add.setOnClickListener(v -> {
