@@ -60,6 +60,8 @@
     <string name="total_amount">Total Amount:</string>
     <string name="clear">Clear</string>
     <string name="_0_0">0.0</string>
+    <string name="shop_type">Shop Type</string>
+    <string name="cart_button">cart button</string>
 
     <string-array name="shop_array">
         <item>Retail</item>

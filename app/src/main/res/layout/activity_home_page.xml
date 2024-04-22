@@ -56,48 +56,50 @@
             android:visibility="gone"
             />
 
-    <LinearLayout
-        android:id="@+id/linear_layout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/user"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="2dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginEnd="13dp"
-        >
-
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/profile_icon"
-        android:id="@+id/profile"
-        android:contentDescription="@string/profile_button"
-        android:layout_marginEnd="5dp"
-        android:background="@drawable/icon_design"
-        />
-
-        <SearchView
-            android:id="@+id/search"
-            android:layout_width="272dp"
-            android:layout_height="43dp"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/icon_design"
-            android:iconifiedByDefault="false"
-            android:queryHint="Search Items" />
-
-        <ImageButton
-            android:id="@+id/cart1"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/linear_layout1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/icon_design"
-            android:contentDescription="cart button"
-            android:src="@drawable/shopping_cart" />
-    </LinearLayout>
+            android:orientation="horizontal"
+            android:layout_below="@+id/user"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginEnd="13dp"
+            >
 
-    <HorizontalScrollView
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/profile_icon"
+                android:id="@+id/profile"
+                android:contentDescription="@string/profile_button"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/icon_design"
+                />
+
+            <SearchView
+                android:id="@+id/search"
+                android:layout_width="0dp"
+                android:layout_height="43dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/icon_design"
+                android:iconifiedByDefault="false"
+                android:queryHint="Search Items" />
+
+            <ImageButton
+                android:id="@+id/cart1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/icon_design"
+                android:contentDescription="@string/cart_button"
+                android:layout_gravity="end"
+                android:src="@drawable/shopping_cart" />
+        </LinearLayout>
+
+
+        <HorizontalScrollView
         android:id="@+id/horizontalScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
