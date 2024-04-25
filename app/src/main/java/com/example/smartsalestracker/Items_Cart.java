@@ -38,6 +38,7 @@ public class Items_Cart extends AppCompatActivity {
         back.setOnClickListener(v -> {
             //go back to the home page activity
             startActivity(new Intent(Items_Cart.this, Home_Page.class));
+            //onBackPressed();
         });
 
         clear_cart.setOnClickListener(v -> {

@@ -67,6 +67,13 @@
     <string name="reports_and_n_analysis">Reports And \n Analysis</string>
     <string name="exit_navigation_page">Exit navigation page</string>
     <string name="user_profile_setting">User profile setting</string>
+    <string name="sales_analysis">sales analysis</string>
+    <string name="clients">Clients</string>
+    <string name="customer_management">customer management</string>
+    <string name="profile">Profile</string>
+    <string name="item_management">Item management</string>
+    <string name="inventory">Inventory</string>
+    <string name="menu">Menu</string>
 
     <string-array name="shop_array">
         <item>Retail</item>

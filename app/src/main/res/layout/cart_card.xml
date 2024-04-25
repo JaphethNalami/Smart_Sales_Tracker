@@ -16,30 +16,6 @@
         android:layout_gravity="center"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="10dp"
-            android:orientation="horizontal">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/item_card_image"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:src="@drawable/blue_circle"
-            android:background="@drawable/image_design"
-            />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="vertical">
-
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
@@ -47,58 +23,59 @@
             android:text="@string/item_name"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
-            android:textSize="15sp"
-            android:paddingStart="2dp"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:paddingStart="5dp"
             android:paddingEnd="2dp"
+            android:layout_marginTop="3dp"
              />
 
         <LinearLayout
+            android:layout_below="@+id/delete_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
             android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/reduce_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/reduce_icon"
-            android:background="@color/container"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            android:layout_marginEnd="5dp"
-            android:layout_gravity="center"
-            android:contentDescription="@string/reduce"
-            />
+            <ImageButton
+                android:id="@+id/reduce_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/reduce_icon"
+                android:background="@color/container"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginEnd="5dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/reduce"
+                />
 
-        <TextView
-            android:id="@+id/count_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="33"
-            android:background="@color/container"
-            />
+            <TextView
+                android:id="@+id/count_text_view"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="33"
+                android:background="@color/container"
+                />
 
-        <ImageButton
-            android:id="@+id/increment_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/increment_icon"
-            android:background="@color/container"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            android:layout_marginEnd="5dp"
-            android:layout_gravity="center"
-            android:contentDescription="@string/increment"
-            />
+            <ImageButton
+                android:id="@+id/increment_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/increment_icon"
+                android:background="@color/container"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginEnd="5dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/increment"
+                />
         </LinearLayout>
-        </LinearLayout>
-        </LinearLayout>
+
+
         <TextView
             android:id="@+id/id"
             android:layout_width="wrap_content"
@@ -138,7 +115,9 @@
             android:src="@drawable/delete_icon"
            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="2dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/container"
+            android:layout_marginTop="3dp"
             android:contentDescription="@string/delete"
             />
 
@@ -153,7 +132,7 @@
             android:drawableStart="@drawable/money_icon"
             android:textSize="20sp"
             android:layout_marginEnd="5dp"
-            android:layout_marginTop="7dp" />
+            android:layout_marginTop="5dp" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

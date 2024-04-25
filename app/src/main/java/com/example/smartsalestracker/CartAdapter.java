@@ -44,7 +44,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
         holder.nameTextView.setText(cardItem.getName());
         holder.countTextView.setText(String.valueOf(cardItem.getItemCount()));
         holder.itemTotalTextView.setText(String.valueOf(cardItem.getItemTotal()));
-       // Glide.with(holder.itemView.getContext()).load(cardItem.image).placeholder(R.drawable.blue_circle).into(holder.productImage);
 
         // Set onClickListeners for buttons if needed
         holder.reduceButton.setOnClickListener(new View.OnClickListener() {
@@ -145,7 +144,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
         public ImageButton incrementButton;
         public ImageButton deleteButton;
         public TextView itemTotalTextView;
-        public ImageView productImage;
+
 
         public CardViewHolder(View itemView) {
             super(itemView);
@@ -155,7 +154,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
             incrementButton = itemView.findViewById(R.id.increment_button);
             deleteButton = itemView.findViewById(R.id.delete_button);
             itemTotalTextView = itemView.findViewById(R.id.item_total);
-            productImage = itemView.findViewById(R.id.user_card_image);
         }
     }
 }
