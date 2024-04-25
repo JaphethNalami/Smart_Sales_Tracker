@@ -71,8 +71,8 @@
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/profile_icon"
-                android:id="@+id/profile"
+                android:src="@drawable/dashboard_icon"
+                android:id="@+id/navigation"
                 android:contentDescription="@string/profile_button"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/icon_design"

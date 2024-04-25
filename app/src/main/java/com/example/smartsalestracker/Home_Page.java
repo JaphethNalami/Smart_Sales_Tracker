@@ -39,7 +39,7 @@ public class Home_Page extends AppCompatActivity {
     MyAdapter myAdapter;
     FirebaseFirestore db;
     private FirebaseAuth mAuth;
-    ImageButton btn_profile,btn_cart,btn_logout;
+    ImageButton btn_navigation,btn_cart,btn_logout;
     TextView username;
     static TextView cart_count,current_total1;
 
@@ -81,7 +81,7 @@ public class Home_Page extends AppCompatActivity {
         // Initialize views
         recyclerView = findViewById(R.id.recycler_view);
         productArrayList = new ArrayList<>();
-        btn_profile = findViewById(R.id.profile);
+        btn_navigation = findViewById(R.id.navigation);
         btn_cart = findViewById(R.id.cart1);
         btn_logout = findViewById(R.id.logout);
         username = findViewById(R.id.user);
@@ -105,7 +105,7 @@ public class Home_Page extends AppCompatActivity {
         });
 
         // Profile button
-        btn_profile.setOnClickListener(v -> {
+        btn_navigation.setOnClickListener(v -> {
             startActivity(new Intent(Home_Page.this, Item_Management.class));
         });
 

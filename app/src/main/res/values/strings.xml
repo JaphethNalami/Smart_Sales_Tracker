@@ -62,6 +62,11 @@
     <string name="_0_0">0.0</string>
     <string name="shop_type">Shop Type</string>
     <string name="cart_button">cart button</string>
+    <string name="customer_n_management">Customer \n management</string>
+    <string name="product_n_management">Product \n Management</string>
+    <string name="reports_and_n_analysis">Reports And \n Analysis</string>
+    <string name="exit_navigation_page">Exit navigation page</string>
+    <string name="user_profile_setting">User profile setting</string>
 
     <string-array name="shop_array">
         <item>Retail</item>

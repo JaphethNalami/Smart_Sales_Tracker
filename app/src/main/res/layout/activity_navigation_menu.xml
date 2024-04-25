@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".Navigation_menu">
 
+
    <TextView
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
@@ -14,6 +15,8 @@
        android:id="@+id/shop_name"
        android:textSize="20sp"
        android:gravity="center"
+       android:layout_marginTop="10dp"
+       android:layout_marginStart="13dp"
        />
 
     <TextView
@@ -24,6 +27,7 @@
         android:textSize="20sp"
         android:gravity="center"
         android:layout_below="@id/shop_name"
+        android:layout_marginStart="13dp"
         />
 
     <TextView
@@ -34,72 +38,307 @@
         android:textSize="20sp"
         android:gravity="center"
         android:layout_below="@id/shop_address"
+        android:layout_marginStart="13dp"
         />
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="94dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="13dp"
+        android:background="@drawable/round_icon"
+        android:contentDescription="Shop image"
+        android:src="@drawable/app_foreground" />
+
+    <LinearLayout
+        android:id="@+id/linear_layout0"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/relative_layout"
+        android:orientation="vertical"
         android:layout_below="@id/category"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="13dp"
+        android:background="@drawable/container"
         >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100000"
+            android:id="@+id/stock"
+            android:textSize="20sp"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stock Value"
+            android:id="@+id/value"
+            android:textSize="20sp"
+            android:gravity="center"
+            />
+    </LinearLayout>
 
-    <ImageButton
+    <LinearLayout
+        android:id="@+id/linear_layout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/profile_icon"
-        android:id="@+id/shop_edit"
-        android:background="@drawable/round_icon"
-        android:contentDescription="User Profile Edit"
-        />
+        android:orientation="vertical"
+        android:layout_below="@id/linear_layout0"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="13dp"
+        >
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/user_profile_icon"
+            android:layout_gravity="center"
+            android:id="@+id/food"
+            android:contentDescription="@string/user_profile_setting"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile\n setting"
+            android:id="@+id/user_profile"
+            android:textSize="20sp"
+            android:gravity="center"
+            />
+    </LinearLayout>
 
-     <TextView
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="Products"
-         android:layout_below="@+id/shop_edit"
-      />
-
-
-    <ImageButton
+    <LinearLayout
+        android:id="@+id/linear_layout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/profile_icon"
-        android:id="@+id/x"
+        android:orientation="vertical"
+        android:layout_below="@id/linear_layout0"
+        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/round_icon"
-        android:contentDescription="User Profile Edit"
-        />
+        >
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/profile_icon"
+            android:layout_gravity="center"
+            android:id="@+id/food1"
+            android:contentDescription="food_category"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Food\n category"
+            android:id="@+id/food_category"
+            android:textSize="20sp"
+            android:gravity="center"
+            />
+    </LinearLayout>
 
-     <TextView
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="Products"
-         android:layout_below="@+id/x"
-         android:layout_centerHorizontal="true"
-         />
+    <LinearLayout
+        android:id="@+id/linear_layout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/linear_layout0"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="13dp"
+        android:layout_alignParentEnd="true"
+        >
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/calender_icon"
+            android:layout_gravity="center"
+            android:id="@+id/drink"
+            android:contentDescription="drink_category"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Drink\n category"
+            android:id="@+id/drink_category"
+            android:textSize="20sp"
+            android:gravity="center"
+            />
+    </LinearLayout>
 
-     <ImageButton
-         android:id="@+id/y"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentEnd="true"
-         android:layout_marginEnd="19dp"
-         android:contentDescription="User Profile Edit"
-         android:background="@drawable/round_icon"
-         android:src="@drawable/profile_icon" />
+    <LinearLayout
+        android:id="@+id/linear_layout4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/linear_layout1"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="13dp"
+        >
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/analysis_icon"
+            android:layout_gravity="center"
+            android:id="@+id/clothes"
+            android:contentDescription="clothes_category"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clothes\n category"
+            android:id="@+id/clothes_category"
+            android:textSize="20sp"
+            android:gravity="center"
+            />
+    </LinearLayout>
 
-     <TextView
-         android:id="@+id/textView2"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="Products"
-         android:layout_below="@+id/x"
-         android:layout_alignParentEnd="true"
-         />
+    <LinearLayout
+        android:id="@+id/linear_layout5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/linear_layout2"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="13dp"
+        android:layout_centerHorizontal="true"
+        >
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/notification_icon"
+            android:layout_gravity="center"
+            android:id="@+id/electronics"
+            android:contentDescription="electronics_category"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Electro\n catego"
+            android:id="@+id/electronics_category"
+            android:textSize="20sp"
+            android:gravity="center"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_layout6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/linear_layout3"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="13dp"
+        android:layout_alignParentEnd="true"
+        >
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/user_profile_icon"
+            android:layout_gravity="center"
+            android:id="@+id/other"
+            android:contentDescription="other_category"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other\n category"
+            android:id="@+id/other_category"
+            android:textSize="20sp"
+            android:gravity="center"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_layout7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/linear_layout4"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="13dp"
+        >
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/shop_details_icon"
+            android:layout_gravity="center"
+            android:id="@+id/shop_detail_img"
+            android:contentDescription="@string/exit_navigation_page"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shop\n details"
+            android:id="@+id/shop_details"
+            android:textSize="20sp"
+            android:gravity="center"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_layout8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/linear_layout4"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="13dp"
+        android:layout_centerHorizontal="true"
+        >
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/exit_icon"
+            android:layout_gravity="center"
+            android:id="@+id/exit2"
+            android:contentDescription="@string/exit_navigation_page"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exit"
+            android:id="@+id/exit_navigation_page"
+            android:textSize="20sp"
+            android:gravity="center"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_layout9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/linear_layout4"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="13dp"
+        android:layout_alignParentEnd="true"
+        >
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/exit_icon"
+            android:layout_gravity="center"
+            android:id="@+id/exit1"
+            android:contentDescription="@string/exit_navigation_page"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exit"
+            android:id="@+id/exit_navigation"
+            android:textSize="20sp"
+            android:gravity="center"
+            />
+    </LinearLayout>
 
 
-    </RelativeLayout>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/exit_icon"
+        android:id="@+id/exit"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="10dp"
+        android:contentDescription="@string/exit_navigation_page" />
 
 </RelativeLayout>
