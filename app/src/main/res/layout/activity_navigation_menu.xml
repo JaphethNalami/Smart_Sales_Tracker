@@ -16,7 +16,8 @@
        android:textSize="20sp"
        android:gravity="center"
        android:layout_marginTop="10dp"
-       android:layout_marginStart="13dp"
+       android:layout_marginStart="15dp"
+       android:drawableLeft="@drawable/shop_name_icon"
        />
 
     <TextView
@@ -27,7 +28,8 @@
         android:textSize="20sp"
         android:gravity="center"
         android:layout_below="@id/shop_name"
-        android:layout_marginStart="13dp"
+        android:layout_marginStart="15dp"
+        android:drawableLeft="@drawable/location_icon"
         />
 
     <TextView
@@ -38,7 +40,8 @@
         android:textSize="20sp"
         android:gravity="center"
         android:layout_below="@id/shop_address"
-        android:layout_marginStart="13dp"
+        android:layout_marginStart="15dp"
+        android:drawableStart="@drawable/shop_type_icon"
         />
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -47,7 +50,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="13dp"
+        android:layout_marginEnd="15dp"
         android:contentDescription="Shop image"
         android:src="@drawable/shop_icon" />
 
@@ -58,8 +61,8 @@
         android:orientation="vertical"
         android:layout_below="@id/category"
         android:layout_marginTop="19dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginEnd="13dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:background="@drawable/container"
         >
         <TextView
@@ -87,7 +90,7 @@
         android:orientation="vertical"
         android:layout_below="@id/linear_layout0"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="13dp"
+        android:layout_marginStart="15dp"
         >
         <ImageButton
             android:layout_width="wrap_content"
@@ -142,7 +145,7 @@
         android:orientation="vertical"
         android:layout_below="@id/linear_layout0"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="13dp"
+        android:layout_marginEnd="15dp"
         android:layout_alignParentEnd="true"
         >
         <ImageButton
@@ -170,7 +173,7 @@
         android:orientation="vertical"
         android:layout_below="@id/linear_layout1"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="13dp"
+        android:layout_marginStart="15dp"
         >
         <ImageButton
             android:layout_width="wrap_content"
@@ -196,7 +199,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="13dp"
+        android:layout_marginStart="15dp"
         android:layout_marginBottom="10dp"
         android:orientation="vertical"
         >

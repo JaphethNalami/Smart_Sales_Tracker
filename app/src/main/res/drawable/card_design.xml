@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/transparent" />
-    <corners android:radius="4dp" />
-    <stroke
-        android:width="2dp"
-        android:color="@color/ic_launcher_background" />
+    <solid android:color="#90DBE7F1" />
+    <corners android:radius="10dp" />
     <padding
-        android:bottom="2dp"
+        android:bottom="1dp"
          />
-
 </shape>
