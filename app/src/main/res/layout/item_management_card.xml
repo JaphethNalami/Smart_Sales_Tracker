@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/card_design"
     android:layout_margin="5dp"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_gravity="center"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="2dp"
@@ -12,10 +12,6 @@
     android:layout_marginRight="7dp"
     >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/user_card_image"
@@ -31,7 +27,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="0dp"
             android:layout_marginEnd="5dp"
             android:orientation="vertical">
 
@@ -147,6 +143,5 @@
                     android:layout_marginTop="4dp" />
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
 </LinearLayout>

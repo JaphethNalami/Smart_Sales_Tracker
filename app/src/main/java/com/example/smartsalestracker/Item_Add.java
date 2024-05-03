@@ -13,14 +13,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -88,15 +84,12 @@ public class Item_Add extends AppCompatActivity {
                 .setTitle("Saving item")
                 .setMessage("Please wait")
                 .create();
-
-
-
-
+        
         shapeableImageView.setOnClickListener(
                 v -> ImagePicker.with(this)
                         .cropSquare()	    			//Crop image(Optional), Check Customization for more option
                         .compress(1024)			//Final image size will be less than 1 MB(Optional)
-                        .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
+                       // .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
                         .start()
         );
 
@@ -116,10 +109,16 @@ public class Item_Add extends AppCompatActivity {
             String bar = itemBarcode.getText().toString();
 
             //save details to firestore
-            if (name.isEmpty() || price.isEmpty() || quantity.isEmpty() || bar.isEmpty() || imageUri == null) {
+            if (name.isEmpty() || price.isEmpty() || quantity.isEmpty() || imageUri == null) {
                 Toast.makeText(Item_Add.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
-            }else
+            } else if (bar.isEmpty()) {
+                //set barcode text to null
+                itemBarcode.setText("Null");
+                Toast.makeText(Item_Add.this, "Barcode set to Null", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+
+            } else
              {
                uploadProfilePicture(imageUri);
             }
@@ -237,7 +236,7 @@ public class Item_Add extends AppCompatActivity {
                         // Update imageUrl variable with the download URL
                         imageUrl = uri.toString();
                         // After getting the download URL, proceed to save user details in Firestore
-                        saveUserDetails();
+                        saveProduct_Details();
                     }).addOnFailureListener(e -> {
                         // Handle the failure to get the download URL
                         Toast.makeText(Item_Add.this, "Image upload failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -255,7 +254,7 @@ public class Item_Add extends AppCompatActivity {
 
 
     // Save item details to Firestore
-    public void saveUserDetails(){
+    public void saveProduct_Details(){
         //get selected category
         String selectedCategory = category.getSelectedItem().toString();
 

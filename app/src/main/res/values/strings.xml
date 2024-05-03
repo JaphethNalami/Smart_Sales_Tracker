@@ -75,6 +75,7 @@
     <string name="inventory">Inventory</string>
     <string name="menu">Menu</string>
     <string name="_33">33</string>
+    <string name="qty">Qty:</string>
 
     <string-array name="shop_array">
         <item>Retail</item>
