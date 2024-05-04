@@ -67,13 +67,7 @@ public class Sign_In extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sign_in);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
         FirebaseApp.initializeApp(this);
 
@@ -144,6 +138,7 @@ public class Sign_In extends AppCompatActivity {
             //navigate to password reset activity
             startActivity(new Intent(Sign_In.this, Password_Reset.class));
         });
+
 
     }
 }
