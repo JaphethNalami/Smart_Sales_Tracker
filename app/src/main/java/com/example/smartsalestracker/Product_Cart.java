@@ -52,6 +52,21 @@ public class Product_Cart {
         return totalPrice;
     }
 
+    //calculate remaining quantity of product
+    public void calculateRemainingQuantity(Product product, int count) {
+        int quantity = Integer.parseInt(product.getQuantity());
+        int remainingQuantity = quantity - count;
+        product.setRemainingQuantity(String.valueOf(remainingQuantity));
+    }
+
+    //calculate sold quantity of product
+    public void calculateSoldQuantity(Product product, int count) {
+        int soldQuantity = Integer.parseInt(product.getSoldQuantity());
+        soldQuantity += count;
+        product.setSoldQuantity(String.valueOf(soldQuantity));
+    }
+
+
 
 
 }

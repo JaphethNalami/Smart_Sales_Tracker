@@ -275,6 +275,7 @@ public class Item_Add extends AppCompatActivity {
             item.put("barcode", bar);
             item.put("category", selectedCategory);
             item.put("image", imageUrl);
+            item.put("soldQuantity", "0");
             db.collection(user2).document("Shop").collection("Products").add(item)
                     .addOnSuccessListener(documentReference -> {
                         String itemId = documentReference.getId(); // Get the generated unique ID

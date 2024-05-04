@@ -1,30 +1,39 @@
 package com.example.smartsalestracker;
 
+import static android.content.ContentValues.TAG;
+
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class CheckoutPage extends AppCompatActivity {
 
@@ -39,7 +48,13 @@ public class CheckoutPage extends AppCompatActivity {
     Button checkoutButton;
     EditText amountPaid;
 
-
+    //firebase initialisations
+    private FirebaseFirestore db ;
+    private FirebaseUser user;
+    private String userId;
+    private FirebaseAuth mAuth;
+    String paymentMethod, phoneNumber, customerName;
+    Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +75,12 @@ public class CheckoutPage extends AppCompatActivity {
         amountPaid = findViewById(R.id.cashAmount);
         balance = findViewById(R.id.balance);
 
+        dialog = new MaterialAlertDialogBuilder(this)
+                .setView(new ProgressBar(this))
+                .setTitle("Processing Payment")
+                .setMessage("Please wait")
+                .create();
+
         //getting the payment method selected by the user
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId == R.id.cash) {
@@ -68,7 +89,6 @@ public class CheckoutPage extends AppCompatActivity {
                 //make linear layout 2 and 3 and button visible
                 linearLayout2.setVisibility(View.VISIBLE);
                 linearLayout3.setVisibility(View.VISIBLE);
-               // checkoutButton.setVisibility(View.VISIBLE);
 
                 //automatically calculate the balance when the user types the amount paid
                 amountPaid.setOnKeyListener((v, keyCode, event) -> {
@@ -93,7 +113,6 @@ public class CheckoutPage extends AppCompatActivity {
                     }
                     return false;
                 });
-
 
             } else if (checkedId == R.id.mpesa) {
                 Toast.makeText(this, "Mpesa", Toast.LENGTH_SHORT).show();
@@ -145,6 +164,148 @@ public class CheckoutPage extends AppCompatActivity {
 
         totalTextView.setText(totalPrice1);
 
+        // Initialize Firestore
+        db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        userId = Objects.requireNonNull(user).getUid();
+
+        //checkout button click to call the checkout method
+        checkoutButton.setOnClickListener(v -> {
+            //updateQuantities();
+            //get phone number and name and payment method selected
+             phoneNumber = Objects.requireNonNull(phone.getText()).toString();
+             customerName = Objects.requireNonNull(name.getText()).toString();
+             paymentMethod = "";
+            if (radioGroup.getCheckedRadioButtonId() == R.id.cash) {
+                paymentMethod = "Cash";
+            } else if (radioGroup.getCheckedRadioButtonId() == R.id.mpesa) {
+                paymentMethod = "Mpesa";
+            }
+
+            //validate the phone number and name and call the checkout method
+            if (phoneNumber.isEmpty() || customerName.isEmpty()) {
+                Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
+                //make the customer details visible
+                nameHolder.setVisibility(View.VISIBLE);
+                phoneHolder.setVisibility(View.VISIBLE);
+            } else {
+                checkout();
+            }
+
+        });
+    }
+
+    private void customerOrders() {
+
+
+        // Save order to the database
+        for (final Product product : cartItems) {
+            Map<String, Object> orderData = new HashMap<>();
+            orderData.put("productName", product.getName());
+            orderData.put("itemCount", product.getItemCount());
+            orderData.put("paymentMethod", paymentMethod);
+            orderData.put("phoneNumber", phoneNumber);
+            orderData.put("customerName", customerName);
+
+
+
+
+            db.collection(userId)
+                    .document("Shop")
+                    .collection("Customers_Orders")
+                    .document(phoneNumber)
+                    .collection("Orders")
+                    .add(orderData)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            // Order saved successfully
+                            Log.d(TAG, "Order saved successfully with ID: " + documentReference.getId());
+                            updateQuantities();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Failed to save order
+                            Log.w(TAG, "Error saving order", e);
+                            //dismiss the progress dialog
+                            dialog.dismiss();
+                        }
+                    });
+        }
+    }
+
+    private void checkout() {
+
+        // Show progress dialog
+        dialog.show();
+        // Save customer details to the database
+        Map<String, Object> customerData = new HashMap<>();
+        customerData.put("customerName", customerName);
+        customerData.put("phoneNumber", phoneNumber);
+
+        db.collection(userId)
+                .document("Shop")
+                .collection("Customers_Details")
+                .document(phoneNumber)
+                .set(customerData)
+                .addOnSuccessListener(aVoid -> {
+                    // Customer details saved successfully
+                    Log.d(TAG, "Customer details saved successfully");
+                    customerOrders();
+                })
+                .addOnFailureListener(e -> {
+                    dialog.dismiss();
+                });
 
     }
+
+    //checkout method to save the order to the database
+    private void updateQuantities() {
+
+            // Save order to the database
+            for (final Product product : cartItems) {
+                final String remainingQuantity = product.getRemainingQuantity();
+                final String soldQuantity = product.getSoldQuantity();
+
+                // Update quantity in Firestore
+                db.collection(userId)
+                        .document("Shop")
+                        .collection("Products")
+                        .document(product.getItemId())
+                        .update("quantity", remainingQuantity, "soldQuantity", soldQuantity)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                // Quantity updated successfully
+                                Log.d(TAG, "Quantity updated for product: " + product.getItemId());
+                                //toast message
+                                Toast.makeText(CheckoutPage.this, "Order placed successfully", Toast.LENGTH_SHORT).show();
+                                //dismiss the progress dialog
+                                dialog.dismiss();
+
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // Failed to update quantity
+                                Log.w(TAG, "Error updating quantity for product: " + product.getItemId(), e);
+
+                                //dismiss the progress dialog
+                                dialog.dismiss();
+                            }
+                        });
+            }
+
+        Product_Cart.getInstance().getSelectedProducts().clear();
+        receiptAdapter.notifyDataSetChanged();
+        // Move to the home page
+        startActivity(new Intent(CheckoutPage.this, Home_Page.class));
+
+    }
+
+
 }

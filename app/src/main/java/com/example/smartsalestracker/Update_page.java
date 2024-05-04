@@ -136,6 +136,7 @@ public class Update_page extends AppCompatActivity {
                             }
                         });
             }
+
         });
 
         // Delete product

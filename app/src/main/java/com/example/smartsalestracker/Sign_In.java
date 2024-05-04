@@ -23,6 +23,8 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Objects;
+
 public class Sign_In extends AppCompatActivity {
 
     TextInputEditText email, password;
@@ -97,8 +99,8 @@ public class Sign_In extends AppCompatActivity {
             dialog.show();
 
             //get input values from views
-            String email1 = email.getText().toString().trim();
-            String password1 = password.getText().toString().trim();
+            String email1 = Objects.requireNonNull(email.getText()).toString().trim();
+            String password1 = Objects.requireNonNull(password.getText()).toString().trim();
 
             // validate inputs
             if (email1.isEmpty() || password1.isEmpty()) {

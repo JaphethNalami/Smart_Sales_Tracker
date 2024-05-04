@@ -67,6 +67,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
                     Product_Cart.getInstance().addToCart(cardItem, count);
                     //toast name of item removed
                     Toast.makeText(v.getContext(), cardItem.getName()+" reduced to" + count, Toast.LENGTH_SHORT).show();
+
+                    //calculate remaining quantity of product
+                    Product_Cart.getInstance().calculateRemainingQuantity(cardItem, count);
+
+                    //calculate sold quantity of product
+                    Product_Cart.getInstance().calculateSoldQuantity(cardItem, count);
+
                 } else {
                     Toast.makeText(v.getContext(), "Item count cannot be less than 1", Toast.LENGTH_SHORT).show();
             }
@@ -98,6 +105,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
                 Product_Cart.getInstance().addToCart(cardItem, count);
                 //toast name of item added
                 Toast.makeText(v.getContext(), cardItem.getName()+" incremented to" + count, Toast.LENGTH_SHORT).show();
+
+                //calculate remaining quantity of product
+                Product_Cart.getInstance().calculateRemainingQuantity(cardItem, count);
+
+                //calculate sold quantity of product
+                Product_Cart.getInstance().calculateSoldQuantity(cardItem, count);
+
             }
                 else {
                     Toast.makeText(v.getContext(), "No more"+cardItem.getName()+"available", Toast.LENGTH_SHORT).show();
@@ -112,8 +126,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
                 cardItemList.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, cardItemList.size());
-                Product deletedProduct = cardItem;
-                Product_Cart.getInstance().removeFromCart(deletedProduct);
+                Product_Cart.getInstance().removeFromCart(cardItem);
                 Toast.makeText(v.getContext(), cardItem.getName()+" removed from cart", Toast.LENGTH_SHORT).show();
             }
         });
@@ -127,6 +140,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
             context.startActivity(new Intent(context, Home_Page.class));
 
         });
+
+        //calculate remaining quantity of product
+        int count = Integer.parseInt(cardItem.getItemCount());
+        Product_Cart.getInstance().calculateRemainingQuantity(cardItem, count);
+
+        //calculate sold quantity of product
+        Product_Cart.getInstance().calculateSoldQuantity(cardItem, count);
 
     }
 
