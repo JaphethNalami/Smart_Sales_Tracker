@@ -7,6 +7,97 @@
     android:layout_height="match_parent"
     tools:context=".CheckoutPage">
 
+    <TextView
+        android:id="@+id/checkoutTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/checkout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        />
+    <TextView
+        android:id="@+id/customerDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/light_blue"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:text="@string/customer_details_optional"
+        android:layout_below="@id/checkoutTitle"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/customerDetails"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:visibility="gone"
+        android:hint="@string/full_name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textField_name"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:visibility="gone"
+        android:hint="@string/phone_number">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phone_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/item"
+        android:layout_below="@id/textField_phone"
+        android:layout_marginStart="25dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quantity"
+        android:layout_below="@id/textField_phone"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:id="@+id/totalTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total"
+        android:layout_below="@id/textField_phone"
+        android:layout_marginEnd="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_alignParentEnd="true"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,23 +107,173 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:scrollbars="vertical"
-        android:layout_above="@+id/totalPrice"
+        android:layout_below="@id/totalTitle"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         />
+
+    <TextView
+        android:id="@+id/paymentMethodTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Payment Method"
+        android:layout_above="@+id/paymentMethod"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        />
+
+    <RadioGroup
+        android:id="@+id/paymentMethod"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_above="@+id/linear_Layout"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        >
+        <RadioButton
+            android:id="@+id/cash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cash"
+            android:textStyle="bold"
+            android:layout_marginEnd="10dp"
+            />
+        <RadioButton
+            android:id="@+id/mpesa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mpesa"
+            android:textStyle="bold"
+            android:layout_marginEnd="10dp"
+            />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/linear_Layout"
+        android:layout_marginTop="3dp"
+        android:layout_alignParentBottom="true"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:background="@drawable/checkout_design"
+
+        >
+
+    <LinearLayout
+        android:id="@+id/linear_Layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        >
+        <TextView
+            android:id="@+id/totalItems"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Price"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_weight="1"
+            />
 
     <TextView
         android:id="@+id/totalPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Total Price: "
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:text="@string/_0"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_alignParentBottom="true"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         />
+    </LinearLayout>
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/linear_Layout2"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        >
+        <TextView
+            android:id="@+id/totalItemsValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/cash_amount"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_weight="1"
+            />
 
+        <EditText
+            android:id="@+id/cashAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:hint="@string/_0_0"
+            android:inputType="number"
+            android:background="@drawable/spinner_design"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
+    </LinearLayout>
 
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/linear_Layout3"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/balance"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:id="@+id/balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_0_0"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
+    </LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkoutButton"
+            android:text="@string/pay_now"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:background="@drawable/button_shape"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
 </RelativeLayout>

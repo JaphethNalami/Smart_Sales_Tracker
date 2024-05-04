@@ -76,6 +76,11 @@
     <string name="menu">Menu</string>
     <string name="_33">33</string>
     <string name="qty">Qty:</string>
+    <string name="customer_details_optional">Customer details(optional)</string>
+    <string name="cash_amount">Cash Amount</string>
+    <string name="balance">Balance:</string>
+    <string name="pay_now">Pay Now</string>
+    <string name="item">Item</string>
 
     <string-array name="shop_array">
         <item>Retail</item>
