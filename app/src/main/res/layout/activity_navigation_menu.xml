@@ -209,6 +209,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/exit_icon"
         android:id="@+id/exit"
+        android:background="@drawable/round_icon"
         android:layout_gravity="center"
         android:contentDescription="@string/exit_navigation_page" />
 

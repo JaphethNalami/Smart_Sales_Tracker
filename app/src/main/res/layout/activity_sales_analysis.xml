@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SalesAnalysis">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sales_analysis"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"/>
+
+        <com.anychart.AnyChartView
+            android:id="@+id/any_chart_view"
+            android:layout_width="match_parent"
+            android:layout_height="630dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/focus_products"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"/>
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_design"
+                    android:padding="1dp">
+
+                    <TextView
+                        android:id="@+id/highestProductSales"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/highest_product_sales"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:layout_gravity="center_horizontal"/>
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/max_image"
+                        android:layout_width="270dp"
+                        android:layout_height="270dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginLeft="2dp"
+                        android:contentDescription="@string/item_image"
+                        android:layout_marginRight="2dp"/>
+
+                        <TextView
+                            android:id="@+id/max_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/item_name"
+                            android:textSize="20sp"
+                            android:layout_marginBottom="5dp"
+                            android:textAlignment="center"
+                            android:layout_gravity="center_horizontal"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/max_quantity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/quantity"
+                            android:layout_marginBottom="5dp"
+                            android:textAlignment="center"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/card_design"
+                    android:padding="1dp"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/highest_quantity_product"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:layout_gravity="center_horizontal"/>
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/quantityImage"
+                        android:layout_width="270dp"
+                        android:layout_height="270dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginLeft="2dp"
+                        android:contentDescription="@string/item_image"
+                        android:layout_marginRight="2dp"/>
+
+                    <TextView
+                        android:id="@+id/quantityName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/item_name"
+                        android:textSize="20sp"
+                        android:layout_marginBottom="5dp"
+                        android:textAlignment="center"
+                        android:layout_gravity="center_horizontal"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/quantityQuantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:hint="@string/quantity"
+                        android:layout_marginBottom="5dp"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/card_design"
+                    android:padding="1dp"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lowest_quantity_product"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:layout_gravity="center_horizontal"/>
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/lowQuantityImage"
+                        android:layout_width="270dp"
+                        android:layout_height="270dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"/>
+
+                    <TextView
+                        android:id="@+id/lowQuantityName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/item_name"
+                        android:textSize="20sp"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:layout_marginBottom="5dp"
+                        android:textAlignment="center"
+                        android:layout_gravity="center_horizontal"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/lowQuantityQuantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/quantity"
+                        android:textColor="@color/blue"
+                        android:layout_marginBottom="5dp"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/card_design"
+                    android:padding="1dp"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/highest_price_product"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:layout_gravity="center_horizontal"/>
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/highPriceImage"
+                        android:layout_width="270dp"
+                        android:layout_height="270dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"/>
+
+                    <TextView
+                        android:id="@+id/highPriceName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/item_name"
+                        android:textSize="20sp"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:layout_marginBottom="5dp"
+                        android:textAlignment="center"
+                        android:layout_gravity="center_horizontal"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/highPriceQuantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/quantity"
+                        android:textColor="@color/blue"
+                        android:layout_marginBottom="5dp"
+                        android:drawableStart="@drawable/money_icon"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/card_design"
+                    android:padding="1dp"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lowest_price_product"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:layout_gravity="center_horizontal"/>
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/lowPriceImage"
+                        android:layout_width="270dp"
+                        android:layout_height="270dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"/>
+
+                    <TextView
+                        android:id="@+id/lowPriceName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/item_name"
+                        android:textSize="20sp"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:layout_marginBottom="5dp"
+                        android:textAlignment="center"
+                        android:layout_gravity="center_horizontal"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/lowPriceQuantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/quantity"
+                        android:textColor="@color/blue"
+                        android:layout_marginBottom="5dp"
+                        android:drawableStart="@drawable/money_icon"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </HorizontalScrollView>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/exit"
+            android:background="@drawable/round_icon"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/light_blue"
+            app:srcCompat="@drawable/exit_icon"
+            android:contentDescription="@string/refresh"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lastUpdated"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            android:textColor="@color/black"
+            android:text="@string/exit"/>
+    </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fab"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        app:srcCompat="@drawable/refresh"
+        android:backgroundTint="@color/light_blue"
+        android:contentDescription="@string/refresh"
+        />
+
+</RelativeLayout>

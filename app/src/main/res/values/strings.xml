@@ -81,6 +81,15 @@
     <string name="balance">Balance:</string>
     <string name="pay_now">Pay Now</string>
     <string name="item">Item</string>
+    <string name="item_image">item image</string>
+    <string name="focus_products">Focus Products</string>
+    <string name="refresh">Refresh</string>
+    <string name="exit">Exit</string>
+    <string name="highest_product_sales">Highest Product Sales</string>
+    <string name="highest_quantity_product">Highest Quantity Product</string>
+    <string name="lowest_quantity_product">Lowest Quantity Product</string>
+    <string name="highest_price_product">Highest Price Product</string>
+    <string name="lowest_price_product">Lowest Price Product</string>
 
     <string-array name="shop_array">
         <item>Retail</item>

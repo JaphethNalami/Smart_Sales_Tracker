@@ -46,7 +46,14 @@ public class Navigation_menu extends AppCompatActivity {
 
         // btn_exit click event
         btn_exit.setOnClickListener(v -> {
-            onBackPressed();
+           // onBackPressed();
+            //go back to home page
+            startActivity(new Intent(Navigation_menu.this, Home_Page.class));
+        });
+
+        // btn_analysis click event
+        btn_analysis.setOnClickListener(v -> {
+            startActivity(new Intent(Navigation_menu.this, SalesAnalysis.class));
         });
 
         CurrentShopDetails();

@@ -44,7 +44,7 @@
             android:name=".Home_Page"
             android:exported="false" />
         <activity
-            android:name=".Item_Update"
+            android:name=".SalesAnalysis"
             android:exported="false" />
         <activity
             android:name=".Item_Add"
