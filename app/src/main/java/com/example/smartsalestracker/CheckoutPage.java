@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,9 +29,14 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -47,6 +53,7 @@ public class CheckoutPage extends AppCompatActivity {
     LinearLayout linearLayout2, linearLayout3;
     Button checkoutButton;
     EditText amountPaid;
+    String order;
 
     //firebase initialisations
     private FirebaseFirestore db ;
@@ -55,6 +62,8 @@ public class CheckoutPage extends AppCompatActivity {
     private FirebaseAuth mAuth;
     String paymentMethod, phoneNumber, customerName;
     Dialog dialog;
+    String currentDate;
+    ArrayList<Product> productArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +83,16 @@ public class CheckoutPage extends AppCompatActivity {
         linearLayout3 = findViewById(R.id.linear_Layout3);
         amountPaid = findViewById(R.id.cashAmount);
         balance = findViewById(R.id.balance);
+        productArrayList = new ArrayList<>();
 
         dialog = new MaterialAlertDialogBuilder(this)
                 .setView(new ProgressBar(this))
                 .setTitle("Processing Payment")
                 .setMessage("Please wait")
                 .create();
+        //getting current date
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+         currentDate = dateFormat.format(new Date());
 
         //getting the payment method selected by the user
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
@@ -152,8 +165,6 @@ public class CheckoutPage extends AppCompatActivity {
 
         // Initialize CartAdapter with fetched item details
         receiptAdapter = new ReceiptAdapter(cartItems, this);
-
-        // Set layout manager and adapter to the RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(receiptAdapter);
 
@@ -169,6 +180,7 @@ public class CheckoutPage extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         userId = Objects.requireNonNull(user).getUid();
+
 
         //checkout button click to call the checkout method
         checkoutButton.setOnClickListener(v -> {
@@ -191,25 +203,50 @@ public class CheckoutPage extends AppCompatActivity {
                 phoneHolder.setVisibility(View.VISIBLE);
             } else {
                 checkout();
+                customerOrders();
+                updateQuantities();
             }
 
         });
     }
 
+    private void checkout() {
+        //get the order number
+        String order= String.valueOf(cartItems.size());
+
+        // Show progress dialog
+        dialog.show();
+        // Save customer details to the database
+        Map<String, Object> customerData = new HashMap<>();
+        customerData.put("customerName", customerName);
+        customerData.put("phoneNumber", phoneNumber);
+        customerData.put("customerPeriod", currentDate);
+        customerData.put("customerOrder", order);
+
+        db.collection(userId)
+                .document("Shop")
+                .collection("Customers_Details")
+                .document(phoneNumber)
+                .set(customerData)
+                .addOnSuccessListener(aVoid -> {
+                    // Customer details saved successfully
+                    Log.d(TAG, "Customer details saved successfully");
+                   // customerOrders();
+                   // updateQuantities();
+                })
+                .addOnFailureListener(e -> {
+                    dialog.dismiss();
+                });
+    }
+    //method to save the order to the database
     private void customerOrders() {
 
-
-        // Save order to the database
         for (final Product product : cartItems) {
             Map<String, Object> orderData = new HashMap<>();
             orderData.put("productName", product.getName());
             orderData.put("itemCount", product.getItemCount());
             orderData.put("paymentMethod", paymentMethod);
             orderData.put("phoneNumber", phoneNumber);
-            orderData.put("customerName", customerName);
-
-
-
 
             db.collection(userId)
                     .document("Shop")
@@ -222,7 +259,7 @@ public class CheckoutPage extends AppCompatActivity {
                         public void onSuccess(DocumentReference documentReference) {
                             // Order saved successfully
                             Log.d(TAG, "Order saved successfully with ID: " + documentReference.getId());
-                            updateQuantities();
+                            //updateQuantities();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -235,31 +272,6 @@ public class CheckoutPage extends AppCompatActivity {
                         }
                     });
         }
-    }
-
-    private void checkout() {
-
-        // Show progress dialog
-        dialog.show();
-        // Save customer details to the database
-        Map<String, Object> customerData = new HashMap<>();
-        customerData.put("customerName", customerName);
-        customerData.put("phoneNumber", phoneNumber);
-
-        db.collection(userId)
-                .document("Shop")
-                .collection("Customers_Details")
-                .document(phoneNumber)
-                .set(customerData)
-                .addOnSuccessListener(aVoid -> {
-                    // Customer details saved successfully
-                    Log.d(TAG, "Customer details saved successfully");
-                    customerOrders();
-                })
-                .addOnFailureListener(e -> {
-                    dialog.dismiss();
-                });
-
     }
 
     //checkout method to save the order to the database
@@ -282,9 +294,11 @@ public class CheckoutPage extends AppCompatActivity {
                                 // Quantity updated successfully
                                 Log.d(TAG, "Quantity updated for product: " + product.getItemId());
                                 //toast message
-                                Toast.makeText(CheckoutPage.this, "Order placed successfully", Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(CheckoutPage.this, "Order placed successfully", Toast.LENGTH_SHORT).show();
                                 //dismiss the progress dialog
                                 dialog.dismiss();
+                                // Move to the home page
+                                startActivity(new Intent(CheckoutPage.this, SaleCompletion.class));
 
                             }
                         })
@@ -302,10 +316,6 @@ public class CheckoutPage extends AppCompatActivity {
 
         Product_Cart.getInstance().getSelectedProducts().clear();
         receiptAdapter.notifyDataSetChanged();
-        // Move to the home page
-        startActivity(new Intent(CheckoutPage.this, Home_Page.class));
 
     }
-
-
 }

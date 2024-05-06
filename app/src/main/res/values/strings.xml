@@ -90,6 +90,14 @@
     <string name="lowest_quantity_product">Lowest Quantity Product</string>
     <string name="highest_price_product">Highest Price Product</string>
     <string name="lowest_price_product">Lowest Price Product</string>
+    <string name="a">A</string>
+    <string name="orders">Orders</string>
+    <string name="period">Period</string>
+    <string name="customer_name">Customer Name</string>
+    <string name="new_sale">New Sale</string>
+    <string name="you_are_good_to_go_we_ve_got_nyour_analysis_covered">You are good to go.We\'ve got\nyour analysis covered.</string>
+    <string name="sale_completed">Sale Completed</string>
+    <string name="done_icon">Done icon</string>
 
     <string-array name="shop_array">
         <item>Retail</item>

@@ -56,6 +56,11 @@ public class Navigation_menu extends AppCompatActivity {
             startActivity(new Intent(Navigation_menu.this, SalesAnalysis.class));
         });
 
+        // btn_analysis click event
+        btn_clients.setOnClickListener(v -> {
+            startActivity(new Intent(Navigation_menu.this, CustomerDisplay.class));
+        });
+
         CurrentShopDetails();
     }
 

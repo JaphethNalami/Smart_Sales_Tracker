@@ -20,6 +20,15 @@
         android:theme="@style/Theme.SmartSalesTracker"
         tools:targetApi="31">
         <activity
+            android:name=".SaleCompletion"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerOrdersDisplay"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerDisplay"
+            android:exported="false" />
+        <activity
             android:name=".CheckoutPage"
             android:exported="false" />
         <activity
