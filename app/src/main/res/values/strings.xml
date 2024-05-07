@@ -76,7 +76,7 @@
     <string name="menu">Menu</string>
     <string name="_33">33</string>
     <string name="qty">Qty:</string>
-    <string name="customer_details_optional">Customer details(optional)</string>
+    <string name="customer_details_optional">Customer details</string>
     <string name="cash_amount">Cash Amount</string>
     <string name="balance">Balance:</string>
     <string name="pay_now">Pay Now</string>
@@ -98,6 +98,11 @@
     <string name="you_are_good_to_go_we_ve_got_nyour_analysis_covered">You are good to go.We\'ve got\nyour analysis covered.</string>
     <string name="sale_completed">Sale Completed</string>
     <string name="done_icon">Done icon</string>
+    <string name="customer_orders">Customer Orders</string>
+    <string name="cash">Cash</string>
+    <string name="mpesa">Mpesa</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
 
     <string-array name="shop_array">
         <item>Retail</item>

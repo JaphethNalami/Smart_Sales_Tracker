@@ -2,15 +2,16 @@ package com.example.smartsalestracker;
 
 public class Customer {
 
-    String phoneNumber,customerOrder,customerPeriod,customerName;
+    String phoneNumber,customerOrder,customerPeriod,customerName,customerGender;
 
     public Customer(){}
 
-    public Customer(String customerName, String customerNumber, String customerOrder, String customerPeriod) {
+    public Customer(String customerName, String customerNumber, String customerOrder, String customerPeriod, String customerGender) {
         this.customerName = customerName;
         this.phoneNumber = customerNumber;
         this.customerOrder = customerOrder;
         this.customerPeriod = customerPeriod;
+        this.customerGender = customerGender;
     }
 
 
@@ -45,6 +46,15 @@ public class Customer {
     public void setCustomerPeriod(String customerPeriod) {
         this.customerPeriod = customerPeriod;
     }
+
+    public String getCustomerGender() {
+        return customerGender;
+    }
+
+    public void setCustomerGender(String customerGender) {
+        this.customerGender = customerGender;
+    }
+
 
 
 }

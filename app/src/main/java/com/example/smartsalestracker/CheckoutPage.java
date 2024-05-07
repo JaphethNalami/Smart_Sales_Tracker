@@ -49,11 +49,11 @@ public class CheckoutPage extends AppCompatActivity {
     TextInputLayout nameHolder,phoneHolder;
     ReceiptAdapter receiptAdapter;
     ArrayList<Product> cartItems = new ArrayList<>();
-    RadioGroup radioGroup;
+    RadioGroup radioGroup, radioGroup1;
     LinearLayout linearLayout2, linearLayout3;
     Button checkoutButton;
     EditText amountPaid;
-    String order;
+    String gender;
 
     //firebase initialisations
     private FirebaseFirestore db ;
@@ -78,6 +78,7 @@ public class CheckoutPage extends AppCompatActivity {
         nameHolder = findViewById(R.id.textField_name);
         phoneHolder = findViewById(R.id.textField_phone);
         radioGroup = findViewById(R.id.paymentMethod);
+        radioGroup1 = findViewById(R.id.customerGenderRadioGroup);
         checkoutButton = findViewById(R.id.checkoutButton);
         linearLayout2 = findViewById(R.id.linear_Layout2);
         linearLayout3 = findViewById(R.id.linear_Layout3);
@@ -102,6 +103,9 @@ public class CheckoutPage extends AppCompatActivity {
                 //make linear layout 2 and 3 and button visible
                 linearLayout2.setVisibility(View.VISIBLE);
                 linearLayout3.setVisibility(View.VISIBLE);
+                phoneHolder.setVisibility(View.VISIBLE);
+                nameHolder.setVisibility(View.VISIBLE);
+                radioGroup1.setVisibility(View.VISIBLE);
 
                 //automatically calculate the balance when the user types the amount paid
                 amountPaid.setOnKeyListener((v, keyCode, event) -> {
@@ -137,6 +141,8 @@ public class CheckoutPage extends AppCompatActivity {
 
                 //make phone number edit text visible
                 phoneHolder.setVisibility(View.VISIBLE);
+                nameHolder.setVisibility(View.VISIBLE);
+                radioGroup1.setVisibility(View.VISIBLE);
 
                 //clear the balance text view and amount paid edit text
                 balance.setText("");
@@ -145,11 +151,23 @@ public class CheckoutPage extends AppCompatActivity {
             }
         });
 
+        //get value selected by the user from the radio group1
+        radioGroup1.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.male) {
+                //set string gender to male
+                gender = "Male";
+            }
+            else if (checkedId == R.id.female) {
+                gender = "Female";
+            }
+        });
+
         //clicking on the customer details to make the edit text visible
         customerDetails.setOnClickListener(v -> {
             nameHolder.setVisibility(View.VISIBLE);
             phoneHolder.setVisibility(View.VISIBLE);
             customerDetails.setVisibility(View.GONE);
+            radioGroup1.setVisibility(View.VISIBLE);
         });
 
 
@@ -196,11 +214,12 @@ public class CheckoutPage extends AppCompatActivity {
             }
 
             //validate the phone number and name and call the checkout method
-            if (phoneNumber.isEmpty() || customerName.isEmpty()) {
+            if (phoneNumber.isEmpty() || customerName.isEmpty() || gender.isEmpty()) {
                 Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
                 //make the customer details visible
                 nameHolder.setVisibility(View.VISIBLE);
                 phoneHolder.setVisibility(View.VISIBLE);
+                radioGroup1.setVisibility(View.VISIBLE);
             } else {
                 checkout();
                 customerOrders();
@@ -222,6 +241,7 @@ public class CheckoutPage extends AppCompatActivity {
         customerData.put("phoneNumber", phoneNumber);
         customerData.put("customerPeriod", currentDate);
         customerData.put("customerOrder", order);
+        customerData.put("customerGender", gender);
 
         db.collection(userId)
                 .document("Shop")
@@ -247,6 +267,7 @@ public class CheckoutPage extends AppCompatActivity {
             orderData.put("itemCount", product.getItemCount());
             orderData.put("paymentMethod", paymentMethod);
             orderData.put("phoneNumber", phoneNumber);
+            orderData.put("customerGender", gender);
 
             db.collection(userId)
                     .document("Shop")
