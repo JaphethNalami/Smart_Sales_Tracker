@@ -161,14 +161,13 @@ public class Home_Page extends AppCompatActivity {
         mySwipeRefreshLayout.setOnRefreshListener(() -> {
                     //reload activity
                     //finish();
-                    //startActivity(getIntent())
-                    //or
-                  //clear the recycler view if its occupied and then fetch the data again
-                         productArrayList.clear();
-                         myAdapter.notifyDataSetChanged();
-                        EventChangeListener();
+                    //startActivity(getIntent());
 
-                        mySwipeRefreshLayout.setRefreshing(false);
+            //set the adapter again
+            myAdapter = new MyAdapter(Home_Page.this, productArrayList);
+            recyclerView.setAdapter(myAdapter);
+
+            mySwipeRefreshLayout.setRefreshing(false);
                 }
         );
 

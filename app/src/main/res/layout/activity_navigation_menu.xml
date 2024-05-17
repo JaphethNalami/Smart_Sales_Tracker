@@ -7,6 +7,19 @@
     android:layout_height="match_parent"
     tools:context=".Navigation_menu">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bussiness Name:"
+        android:id="@+id/business_name"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
+        android:textStyle="bold"
+        android:textColor="@color/light_blue"
+        />
+
 
    <TextView
        android:layout_width="wrap_content"
@@ -16,8 +29,23 @@
        android:textSize="20sp"
        android:gravity="center"
        android:layout_marginTop="10dp"
-       android:layout_marginStart="15dp"
+       android:layout_marginStart="5dp"
+       android:layout_toEndOf="@id/business_name"
+       android:textStyle="bold"
        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bussiness Address:"
+        android:id="@+id/business_address"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_below="@id/business_name"
+        android:layout_marginStart="15dp"
+        android:textStyle="bold"
+        android:textColor="@color/light_blue"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,7 +55,22 @@
         android:textSize="20sp"
         android:gravity="center"
         android:layout_below="@id/shop_name"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@id/business_address"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bussiness Type:"
+        android:id="@+id/bussiness_type"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_below="@id/shop_address"
         android:layout_marginStart="15dp"
+        android:textStyle="bold"
+        android:textColor="@color/light_blue"
         />
 
     <TextView
@@ -38,7 +81,9 @@
         android:textSize="20sp"
         android:gravity="center"
         android:layout_below="@id/shop_address"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@id/bussiness_type"
+        android:textStyle="bold"
         />
 
     <LinearLayout
@@ -56,17 +101,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="100000"
-            android:id="@+id/stock"
+            android:id="@+id/date"
             android:textSize="20sp"
             android:gravity="center"
+            android:textStyle="bold"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Stock Value"
-            android:id="@+id/value"
+            android:id="@+id/time"
             android:textSize="20sp"
             android:gravity="center"
+            android:textStyle="bold"
             />
     </LinearLayout>
 

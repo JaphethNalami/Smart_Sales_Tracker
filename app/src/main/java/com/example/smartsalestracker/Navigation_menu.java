@@ -15,10 +15,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class Navigation_menu extends AppCompatActivity {
 
     ImageButton btn_clients, btn_products, btn_user_profile, btn_analysis, btn_exit;
-    TextView txt_name, txt_address, txt_category;
+    TextView txt_name, txt_address, txt_category , txt_date, txt_time;
 
     private FirebaseAuth mAuth;
     FirebaseFirestore db;
@@ -37,6 +41,8 @@ public class Navigation_menu extends AppCompatActivity {
         txt_category = findViewById(R.id.category);
         txt_address = findViewById(R.id.shop_address);
         txt_name = findViewById(R.id.shop_name);
+        txt_date = findViewById(R.id.date);
+        txt_time = findViewById(R.id.time);
         db = FirebaseFirestore.getInstance();
 
         //btn_products click event
@@ -62,6 +68,34 @@ public class Navigation_menu extends AppCompatActivity {
         });
 
         CurrentShopDetails();
+
+        //get current date
+        String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+
+        //display current date and time
+        txt_date.setText(date);
+
+        //get current time and auto update every second
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Thread.sleep(1000);
+                        runOnUiThread(() -> {
+                            String time = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+                            txt_time.setText(time);
+                        });
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        thread.start();
+
+
+
     }
 
     private void CurrentShopDetails() {
