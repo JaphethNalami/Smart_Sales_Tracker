@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -64,6 +65,7 @@ public class CheckoutPage extends AppCompatActivity {
     Dialog dialog;
     String currentDate;
     ArrayList<Product> productArrayList;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +87,11 @@ public class CheckoutPage extends AppCompatActivity {
         amountPaid = findViewById(R.id.cashAmount);
         balance = findViewById(R.id.balance);
         productArrayList = new ArrayList<>();
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
+
+        //progress dialog
         dialog = new MaterialAlertDialogBuilder(this)
                 .setView(new ProgressBar(this))
                 .setTitle("Processing Payment")
@@ -153,12 +159,12 @@ public class CheckoutPage extends AppCompatActivity {
 
         //get value selected by the user from the radio group1
         radioGroup1.setOnCheckedChangeListener((group, checkedId) -> {
-            if (checkedId == R.id.male) {
-                //set string gender to male
-                gender = "Male";
+            if (radioGroup1.getCheckedRadioButtonId() == R.id.male) {
+                //toast message
+                Toast.makeText(this, "Male", Toast.LENGTH_SHORT).show();
             }
-            else if (checkedId == R.id.female) {
-                gender = "Female";
+            else if (radioGroup1.getCheckedRadioButtonId() == R.id.female) {
+                Toast.makeText(this, "Female", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -207,11 +213,20 @@ public class CheckoutPage extends AppCompatActivity {
              phoneNumber = Objects.requireNonNull(phone.getText()).toString();
              customerName = Objects.requireNonNull(name.getText()).toString();
              paymentMethod = "";
+             gender = "";
             if (radioGroup.getCheckedRadioButtonId() == R.id.cash) {
                 paymentMethod = "Cash";
             } else if (radioGroup.getCheckedRadioButtonId() == R.id.mpesa) {
                 paymentMethod = "Mpesa";
             }
+
+            if (radioGroup1.getCheckedRadioButtonId() == R.id.male) {
+                gender = "Male";
+            }
+            else if (radioGroup1.getCheckedRadioButtonId() == R.id.female) {
+                gender = "Female";
+            }
+
 
             //validate the phone number and name and call the checkout method
             if (phoneNumber.isEmpty() || customerName.isEmpty() || gender.isEmpty()) {
@@ -224,6 +239,15 @@ public class CheckoutPage extends AppCompatActivity {
                 checkout();
                 customerOrders();
                 updateQuantities();
+
+                // Log analytics for each item in the cart
+                for (Product product : cartItems) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(FirebaseAnalytics.Param.ITEM_ID, product.getItemId());
+                    bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, product.getName());
+                    bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "product");
+                    mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+                }
             }
 
         });
@@ -268,6 +292,8 @@ public class CheckoutPage extends AppCompatActivity {
             orderData.put("paymentMethod", paymentMethod);
             orderData.put("phoneNumber", phoneNumber);
             orderData.put("customerGender", gender);
+            orderData.put("orderDate", currentDate);
+            orderData.put("productCategory", product.getCategory());
 
             db.collection(userId)
                     .document("Shop")

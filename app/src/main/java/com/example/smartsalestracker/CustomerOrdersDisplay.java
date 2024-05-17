@@ -113,11 +113,14 @@ public class CustomerOrdersDisplay extends AppCompatActivity {
                             String field2 = document.getString("paymentMethod");
                             String field3 = document.getString("customerGender");
                             String field4 = document.getString("productName");
+                            String field5 = document.getString("orderDate");
+                            String field6 = document.getString("productCategory");
+
 
                             // Add your fields here according to your document structure
 
                             // You can then format these fields as per your requirements
-                            String orderInfo = "Item: " + field4 + "\nQuantity: " + field1 + "\nPayment: " + field2 + "\nGender: " + field3;
+                            String orderInfo = "Category: " + field6 + "\nItem: " + field4 + "\nQuantity: " + field1 + "\nPayment: " + field2 + "\nGender: " + field3 + "\nDate: " + field5 ;
                             //display the values of orderInfo only in one line
                             //String orderInfo = "  " + field4 + "    " + field1 + "   " + field2 + "   " + field3;
 

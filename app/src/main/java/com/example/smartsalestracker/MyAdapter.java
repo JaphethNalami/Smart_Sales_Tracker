@@ -117,6 +117,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ProductViewHolder>
                     countTextView.setText(String.valueOf(count));
                 }
 
+               //toast name of selected product if it does not exist in the cart
+                if (!Product_Cart.getInstance().getSelectedProducts().containsKey(product)) {
+                    Toast.makeText(v.getContext(), productName.getText().toString() + " added to cart", Toast.LENGTH_SHORT).show();
+                }
+
             }
 
 

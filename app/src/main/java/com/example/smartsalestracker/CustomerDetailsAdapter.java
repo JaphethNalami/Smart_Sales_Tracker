@@ -6,10 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class CustomerDetailsAdapter extends RecyclerView.Adapter<CustomerDetailsAdapter.CustomerViewHolder> {
@@ -36,11 +39,12 @@ public class CustomerDetailsAdapter extends RecyclerView.Adapter<CustomerDetails
         Customer customer = customerArrayList.get(position);
         holder.customerName.setText(customer.getCustomerName());
         holder.customerPhone.setText(customer.getphoneNumber());
-        holder.orders.setText(String.valueOf(customer.getCustomerOrder()));
-        holder.period.setText(customer.getCustomerPeriod());
+       // holder.orders.setText(String.valueOf(customer.getCustomerOrder()));
         holder.nameInitial.setText(String.valueOf(customer.getCustomerName().charAt(0)));
-
-
+        //get value of orders and convert to string
+        String orders = String.valueOf(customer.getCustomerOrder());
+        //display the orders
+        holder.orders.setText(orders + " Item(s)");
 
         // Set click listener
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +58,42 @@ public class CustomerDetailsAdapter extends RecyclerView.Adapter<CustomerDetails
                 context.startActivity(intent);
             }
         });
+
+        //get stored date
+        String date = customer.getCustomerPeriod();
+        //convert the string date to local date
+        LocalDate storedDate = LocalDate.parse(date);
+
+        //get current date
+        LocalDate currentDate = LocalDate.now();
+
+        // Sample dates to compare
+        LocalDate date2 = LocalDate.of(currentDate.getYear(), currentDate.getMonth(), currentDate.getDayOfMonth());
+        LocalDate date1 = LocalDate.of(storedDate.getYear(), storedDate.getMonth(), storedDate.getDayOfMonth());
+
+        // Calculate the difference in days
+        long differenceInDays = ChronoUnit.DAYS.between(date1, date2);
+
+        //check if the difference is zero and display the period as Today
+        if(differenceInDays == 0){
+            holder.period.setText("Today");
+        }
+        else if (differenceInDays == 1){
+            holder.period.setText("Yesterday");
+        }
+        else if(differenceInDays >30){
+            //convert the difference to string
+            String value = String.valueOf(differenceInDays/30);
+            //display the difference in days
+            holder.period.setText(value + " months ago");
+        }
+        else {
+            //convert the difference to string
+            String value = String.valueOf(differenceInDays);
+            //display the difference in days
+            holder.period.setText(value + " days ago");
+        }
+
     }
 
     @Override
