@@ -127,7 +127,10 @@ public class Item_Add extends AppCompatActivity {
 
         discard.setOnClickListener(v -> {
             //move to item add activity
-            startActivity(new Intent(Item_Add.this, Item_Add.class));
+            startActivity(new Intent(Item_Add.this, Home_Page.class));
+
+            //toast fields cleared
+            Toast.makeText(Item_Add.this, "Fields cleared", Toast.LENGTH_SHORT).show();
 
         });
 

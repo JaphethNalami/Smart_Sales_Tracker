@@ -62,14 +62,15 @@
 
         <Spinner
             android:id="@+id/category"
-            android:layout_width="237dp"
+            android:layout_width="match_parent"
             android:layout_height="53dp"
             android:layout_below="@+id/category_text"
             android:layout_marginStart="20dp"
             android:layout_marginTop="3dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="1dp"
             android:background="@drawable/spinner_design"
+            android:layout_toStartOf="@id/add_category"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -140,12 +141,14 @@
 
         <TextView
             android:id="@+id/barcode"
-            android:layout_width="190dp"
+            android:layout_width="match_parent"
             android:layout_height="47dp"
             android:layout_below="@id/textField_quantity"
             android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/spinner_design"
+            android:layout_toStartOf="@id/scan"
             android:hint="@string/barcode"
             android:text=""
             android:textSize="20sp"
@@ -157,7 +160,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/textField_quantity"
             android:layout_alignParentEnd="true"
-            android:layout_alignEnd="@+id/barcode"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="15dp"
             android:text="@string/scan"
