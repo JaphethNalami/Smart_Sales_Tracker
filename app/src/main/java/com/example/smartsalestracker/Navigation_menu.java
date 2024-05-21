@@ -21,7 +21,7 @@ import java.util.Locale;
 
 public class Navigation_menu extends AppCompatActivity {
 
-    ImageButton btn_clients, btn_products, btn_user_profile, btn_analysis, btn_exit;
+    ImageButton btn_clients, btn_products, btn_user_profile, btn_analysis, btn_exit, btn_reports;
     TextView txt_name, txt_address, txt_category , txt_date, txt_time;
 
     private FirebaseAuth mAuth;
@@ -38,6 +38,7 @@ public class Navigation_menu extends AppCompatActivity {
         btn_clients = findViewById(R.id.customer);
         btn_user_profile = findViewById(R.id.user_profile);
         btn_exit = findViewById(R.id.exit);
+        btn_reports = findViewById(R.id.reports);
         txt_category = findViewById(R.id.category);
         txt_address = findViewById(R.id.shop_address);
         txt_name = findViewById(R.id.shop_name);
@@ -65,6 +66,11 @@ public class Navigation_menu extends AppCompatActivity {
         // btn_analysis click event
         btn_clients.setOnClickListener(v -> {
             startActivity(new Intent(Navigation_menu.this, CustomerDisplay.class));
+        });
+
+        // btn_reports click event
+        btn_reports.setOnClickListener(v -> {
+            startActivity(new Intent(Navigation_menu.this, Reports.class));
         });
 
         CurrentShopDetails();

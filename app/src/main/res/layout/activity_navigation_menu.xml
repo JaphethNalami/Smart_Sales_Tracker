@@ -231,6 +231,35 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear_layout1"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        >
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/reports_icon"
+            android:layout_gravity="center"
+            android:id="@+id/reports"
+            android:contentDescription="@string/sales_reports"
+            android:background="@drawable/round_design2"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reports"
+            android:textSize="20sp"
+            android:gravity="center"
+            />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/linear_layout5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
