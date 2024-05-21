@@ -308,7 +308,8 @@ public class Reports extends AppCompatActivity {
                         if (reportClass != null) {
                             itemsArrayList.add(reportClass);
                             // Add the item to the listview
-                            orderList.add(Objects.requireNonNull(reportClass).getProductName() + " - " + reportClass.getItemCount() + " - " + reportClass.getTotalPrice());
+                            orderList.add(Objects.requireNonNull(reportClass).getProductName() + " \n" +
+                                    "Count: " + reportClass.getItemCount());
                             adapter.notifyDataSetChanged();
                         }
                     }

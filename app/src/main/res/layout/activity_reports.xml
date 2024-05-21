@@ -5,18 +5,19 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".Reports">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="1dp"
             android:text="@string/reports"
             android:layout_gravity="center"
@@ -30,7 +31,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:background="@color/light_gray"
+            android:background="@drawable/card_design"
             >
 
             <TextView
@@ -76,7 +77,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:background="@color/light_gray"
+            android:background="@drawable/card_design"
             >
 
             <TextView
@@ -120,13 +121,13 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:background="@color/light_gray"
+            android:background="@drawable/card_design"
             >
 
             <ImageButton
                 android:id="@+id/previous_date"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@drawable/previous_icon"
                 android:contentDescription="@string/move_to_previous_date"
                 />
@@ -149,7 +150,7 @@
             <ImageButton
                 android:id="@+id/next_date"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@drawable/next_icon"
                 android:layout_alignParentEnd="true"
                 android:contentDescription="@string/move_to_current_date"
@@ -163,7 +164,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:background="@color/light_gray"
+            android:background="@drawable/card_design"
             >
 
             <TextView
@@ -181,8 +182,8 @@
                 android:id="@+id/total_sales_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="7dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_below="@id/total_sales"
@@ -197,7 +198,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:background="@color/light_gray"
+            android:background="@drawable/card_design"
             >
 
             <TextView
@@ -215,8 +216,8 @@
                 android:id="@+id/sale_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="7dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_below="@id/sales"
@@ -231,7 +232,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:background="@color/light_gray"
+            android:background="@drawable/card_design"
             >
 
             <TextView
@@ -277,7 +278,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:background="@color/light_gray"
+            android:background="@drawable/card_design"
             >
 
             <TextView
@@ -322,22 +323,32 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="1dp"
-            android:text="Sales"
+            android:text="SOLD ITEMS"
             android:layout_gravity="center"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <ListView
-            android:id="@+id/listView"
-            android:layout_width="match_parent"
-            android:layout_height="145dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/light_gray"
-            android:divider="?attr/colorControlNormal"
-            android:dividerHeight="1dp" />
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="245dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:divider="?attr/colorControlNormal"
+                android:background="@drawable/card_design"
+                android:dividerHeight="1dp"
+                android:paddingTop="5dp" />
 
-    </LinearLayout>
-</ScrollView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="1dp"
+                android:text="Realtime"
+                android:layout_gravity="center"
+                android:textStyle="italic" />
+
+        </LinearLayout>
+    </ScrollView>
