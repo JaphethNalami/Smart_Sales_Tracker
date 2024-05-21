@@ -103,6 +103,18 @@
     <string name="mpesa">Mpesa</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
+    <string name="reports">Reports</string>
+    <string name="low_stock_inventory">LOW STOCK INVENTORY</string>
+    <string name="click_to_explore">Click to explore</string>
+    <string name="_2">2</string>
+    <string name="remaining_stock">REMAINING STOCK</string>
+    <string name="move_to_previous_date">Move to previous date</string>
+    <string name="move_to_current_date">Move to current date</string>
+    <string name="today_21_may">Today :21 May</string>
+    <string name="total_sales">TOTAL SALES</string>
+    <string name="ksh_0">Ksh 0</string>
+    <string name="sales">SALES</string>
+    <string name="sales_reports">Sales reports</string>
 
     <string-array name="shop_array">
         <item>Retail</item>
