@@ -239,6 +239,7 @@ public class CheckoutPage extends AppCompatActivity {
                 checkout();
                 customerOrders();
                 updateQuantities();
+                soldProducts();
 
                 // Log analytics for each item in the cart
                 for (Product product : cartItems) {
@@ -251,6 +252,42 @@ public class CheckoutPage extends AppCompatActivity {
             }
 
         });
+    }
+
+    private void soldProducts() {
+        for (final Product product : cartItems) {
+            Map<String, Object> soldData = new HashMap<>();
+            soldData.put("productName", product.getName());
+            soldData.put("itemCount", product.getItemCount());
+            soldData.put("paymentMethod", paymentMethod);
+            soldData.put("totalPrice", product.getItemTotal());
+
+            db.collection(userId)
+                    .document("Shop")
+                    .collection("Sales_Reports")
+                    .document(currentDate)
+                    .collection("Items")
+                    .add(soldData)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            // Order saved successfully
+                            Log.d(TAG, "Order saved successfully with ID: " + documentReference.getId());
+                            //updateQuantities();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Failed to save order
+                            Log.w(TAG, "Error saving order", e);
+                            //dismiss the progress dialog
+                            dialog.dismiss();
+                        }
+                    });
+
+
+        }
     }
 
     private void checkout() {

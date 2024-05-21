@@ -115,6 +115,7 @@
     <string name="ksh_0">Ksh 0</string>
     <string name="sales">SALES</string>
     <string name="sales_reports">Sales reports</string>
+    <string name="_0_items">0 Items</string>
 
     <string-array name="shop_array">
         <item>Retail</item>
