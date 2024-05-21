@@ -23,6 +23,12 @@
         android:theme="@style/Theme.SmartSalesTracker"
         tools:targetApi="31">
         <activity
+            android:name=".RemainingStock"
+            android:exported="false" />
+        <activity
+            android:name=".LowStock"
+            android:exported="false" />
+        <activity
             android:name=".Reports"
             android:exported="false" />
         <activity

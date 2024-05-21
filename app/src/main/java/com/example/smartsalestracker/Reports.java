@@ -3,6 +3,7 @@ package com.example.smartsalestracker;
 import static android.content.ContentValues.TAG;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -111,37 +112,81 @@ public class Reports extends AppCompatActivity {
                     }
                 }
             }
+            else {
+                count = 6;
+            }
             //clear arraylist
             itemsArrayList.clear();
+            orderList.clear();
             totalSalesText.setText("Total Sales: 0");
             mpesa.setText("Mpesa: 0");
             cash.setText("Cash: 0");
             cashText.setText("Cash: 0");
             mpesaText.setText("Mpesa: 0");
             salesText.setText("Sales: 0");
+
+            //clear listview
+            adapter.clear();
+            adapter.notifyDataSetChanged();
             getData();
         });
 
         currentDay.setOnClickListener(v -> {
+            count--;
+            // Count should not be less than 0
+            if (count >= 0) {
+                // Get next dates and display
+                LocalDate currentDate1 = LocalDate.now(); // Renamed to avoid confusion
+                // Clear text before setting new date
+                dateText.setText("");
+                for (int i = 0; i <= count; i++) {
+                    LocalDate previousDate = currentDate1.minusDays(i); // Use currentDate instead of LocalDate.now()
+                    String month = previousDate.getMonth().toString();
+                    month = month.substring(0,1).toUpperCase() + month.substring(1).toLowerCase();
+                    int previousDay = previousDate.getDayOfMonth();
 
-        LocalDate currentDate1 = LocalDate.now();
-        String month = currentDate1.getMonth().toString();
-        month = month.substring(0,1).toUpperCase() + month.substring(1).toLowerCase();
-        int day = currentDate1.getDayOfMonth();
-        dateText.setText("Today: " +day + " " + month);
+                    //store the date in a string
+                    date = previousDate.toString();
 
-         date = currentDate1.toString();
-
-         //clear arraylist
+                    if (i == 0) {
+                        dateText.setText("Today: " + previousDay + " " + month);
+                    }
+                    else if (i == 1) {
+                        dateText.setText("Yesterday: " + previousDay + " " + month);
+                    } else {
+                        dateText.setText(previousDay + " " + month);
+                    }
+                }
+            }
+            else {
+                count = 0;
+            }
+            //clear arraylist
             itemsArrayList.clear();
+            orderList.clear();
             totalSalesText.setText("Total Sales: 0");
             mpesa.setText("Mpesa: 0");
             cash.setText("Cash: 0");
             cashText.setText("Cash: 0");
             mpesaText.setText("Mpesa: 0");
             salesText.setText("Sales: 0");
+
+            //clear listview
+            adapter.clear();
+            adapter.notifyDataSetChanged();
+
             getData();
 
+        });
+
+        lowStock.setOnClickListener(v -> {
+            //navigate to low stock activity
+            startActivity(new Intent(Reports.this, LowStock.class));
+        });
+
+        remainingStock.setOnClickListener(v -> {
+            //navigate to remaining stock activity
+            startActivity(new Intent(Reports.this, RemainingStock.class));
         });
 
         //method to get low stock items
@@ -162,9 +207,71 @@ public class Reports extends AppCompatActivity {
 
     private void getRemainingStock() {
 
+        //get name of the item and the quantity and diplay count of those having quantity greater than 0
+        db.collection(userId)
+                .document("Shop")
+                .collection("Products")
+                .addSnapshotListener((value, error) -> {
+                    if (error != null) {
+                        // Handle the error
+                        Log.e(TAG, "Error getting remaining stock data: ", error);
+                        return;
+                    }
+
+                    if (value.isEmpty()) {
+                        // Display a message if no remaining stock data is available
+                        Toast.makeText(Reports.this, "No remaining stock data available", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    // Add retrieved items to the list
+                    int remainingStockCount = 0;
+                    for (DocumentSnapshot doc : value.getDocuments()) {
+                        Product product = doc.toObject(Product.class);
+                        if (product != null) {
+                            //convrt quantity to integer
+                            int quantity = Integer.parseInt(product.getQuantity());
+                            if (quantity > 0) {
+                                remainingStockCount++;
+                            }
+                        }
+                    }
+                    remainingStockText.setText(remainingStockCount + "  Items");
+                });
+
     }
 
     private void getLowStock() {
+
+        //get name of the item and the quantity and diplay count of those having quantity 0
+        db.collection(userId)
+                .document("Shop")
+                .collection("Products")
+                .addSnapshotListener((value, error) -> {
+                    if (error != null) {
+                        // Handle the error
+                        Log.e(TAG, "Error getting low stock data: ", error);
+                        return;
+                    }
+
+                    if (value.isEmpty()) {
+                        // Display a message if no low stock data is available
+                        Toast.makeText(Reports.this, "No low stock data available", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    // Add retrieved items to the list
+                    int lowStockCount = 0;
+                    for (DocumentSnapshot doc : value.getDocuments()) {
+                        Product product = doc.toObject(Product.class);
+                        if (product != null) {
+                            //convrt quantity to integer
+                            int quantity = Integer.parseInt(product.getQuantity());
+                            if (quantity == 0) {
+                                lowStockCount++;
+                            }
+                        }
+                    }
+                    lowStockText.setText(lowStockCount + "  Items");
+                });
 
     }
 
@@ -195,15 +302,16 @@ public class Reports extends AppCompatActivity {
                         Toast.makeText(Reports.this, "No sales data available for the selected date", Toast.LENGTH_SHORT).show();
                         return;
                     }
-
                     // Add retrieved items to the list
                     for (DocumentSnapshot doc : value.getDocuments()) {
                         ReportClass reportClass = doc.toObject(ReportClass.class);
                         if (reportClass != null) {
                             itemsArrayList.add(reportClass);
+                            // Add the item to the listview
+                            orderList.add(Objects.requireNonNull(reportClass).getProductName() + " - " + reportClass.getItemCount() + " - " + reportClass.getTotalPrice());
+                            adapter.notifyDataSetChanged();
                         }
                     }
-
                     salesText.setText(itemsArrayList.size()+"  Items");
 
                     //convert to integer and add all totalPrices to get total sales
@@ -230,13 +338,11 @@ public class Reports extends AppCompatActivity {
                             cashTotal += Float.parseFloat(reportClass.getTotalPrice());
                         }
                     }
-
-// Update TextViews with the accumulated totals
+                    // Update TextViews with the accumulated totals
                     mpesa.setText(mpesaCount +"  Items");
                     cash.setText( cashCount +"  Items");
                     mpesaText.setText("KSH: " + mpesaTotal);
                     cashText.setText("KSH: " + cashTotal);
-
 
                     if (dialog.isShowing()) {
                         dialog.dismiss();
