@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
@@ -40,6 +41,7 @@ public class Home_Page extends AppCompatActivity {
     FirebaseFirestore db;
     private FirebaseAuth mAuth;
     ImageButton btn_navigation,btn_cart,btn_logout;
+    Button recommender,inventory,analysis,reports,clients;
     TextView username;
     static TextView cart_count,current_total1;
 
@@ -90,6 +92,12 @@ public class Home_Page extends AppCompatActivity {
         mySwipeRefreshLayout = findViewById(R.id.main);
         cart_count = findViewById(R.id.cart_count);
         current_total1 = findViewById(R.id.current_total);
+        recommender = findViewById(R.id.recommender);
+        inventory = findViewById(R.id.inventory);
+        analysis = findViewById(R.id.analysis);
+        reports = findViewById(R.id.reports);
+        clients = findViewById(R.id.clients);
+
 
         // Add button
         add.setOnClickListener(v -> {
@@ -118,6 +126,32 @@ public class Home_Page extends AppCompatActivity {
         current_total1.setOnClickListener(v -> {
             startActivity(new Intent(Home_Page.this, Items_Cart.class));
         });
+
+        //recommender button
+        recommender.setOnClickListener(v -> {
+           // startActivity(new Intent(Home_Page.this, Recommender.class));
+        });
+
+        //inventory button
+        inventory.setOnClickListener(v -> {
+            startActivity(new Intent(Home_Page.this, Item_Management.class));
+        });
+
+        //analysis button
+        analysis.setOnClickListener(v -> {
+            startActivity(new Intent(Home_Page.this, SalesAnalysis.class));
+        });
+
+        //reports button
+        reports.setOnClickListener(v -> {
+            startActivity(new Intent(Home_Page.this, Reports.class));
+        });
+
+        //clients button
+        clients.setOnClickListener(v -> {
+            startActivity(new Intent(Home_Page.this, CustomerDisplay.class));
+        });
+
 
 
         // call method for search on click

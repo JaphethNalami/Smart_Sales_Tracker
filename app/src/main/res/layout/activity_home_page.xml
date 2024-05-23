@@ -161,47 +161,47 @@
             android:layout_marginBottom="10dp">
 
             <Button
-                android:id="@+id/food"
+                android:id="@+id/inventory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Food"
+                android:text="Inventory"
                 android:layout_marginStart="4dp"
                 android:background="@drawable/button_shape"
                 android:textColor="@color/white"
                 android:layout_marginEnd="5dp"/>
 
             <Button
-                android:id="@+id/clothes"
+                android:id="@+id/analysis"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/button_shape"
-                android:text="Clothes"
+                android:text="Analysis"
                 android:textColor="@color/white" />
 
             <Button
-                android:id="@+id/electronics"
+                android:id="@+id/reports"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Electronics"
+                android:text="Reports"
                 android:background="@drawable/button_shape"
                 android:textColor="@color/white"
                 android:layout_marginEnd="5dp"/>
 
             <Button
-                android:id="@+id/other"
+                android:id="@+id/clients"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Other"
+                android:text="Clients"
                 android:background="@drawable/button_shape"
                 android:textColor="@color/white"
                 android:layout_marginEnd="5dp"/>
 
             <Button
-                android:id="@+id/motor"
+                android:id="@+id/recommender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Motorist"
+                android:text="Recommender"
                 android:background="@drawable/button_shape"
                 android:textColor="@color/white"
                 android:layout_marginEnd="5dp"/>

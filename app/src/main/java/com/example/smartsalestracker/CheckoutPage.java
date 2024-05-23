@@ -112,6 +112,7 @@ public class CheckoutPage extends AppCompatActivity {
                 phoneHolder.setVisibility(View.VISIBLE);
                 nameHolder.setVisibility(View.VISIBLE);
                 radioGroup1.setVisibility(View.VISIBLE);
+                checkoutButton.setVisibility(View.GONE);
 
                 //automatically calculate the balance when the user types the amount paid
                 amountPaid.setOnKeyListener((v, keyCode, event) -> {

@@ -66,6 +66,8 @@
                 android:layout_marginEnd="20dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
+                android:textColor="@color/red"
+                android:textStyle="bold"
                 android:text="@string/_2" />
 
         </RelativeLayout>
@@ -112,6 +114,8 @@
                 android:layout_marginEnd="20dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
+                android:textColor="@color/green"
+                android:textStyle="bold"
                 android:text="@string/_2" />
         </RelativeLayout>
 

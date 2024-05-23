@@ -111,7 +111,7 @@
     <string name="move_to_previous_date">Move to previous date</string>
     <string name="move_to_current_date">Move to current date</string>
     <string name="today_21_may">Today :21 May</string>
-    <string name="total_sales">TOTAL SALES</string>
+    <string name="total_sales">TOTAL AMOUNT</string>
     <string name="ksh_0">Ksh 0</string>
     <string name="sales">SALES</string>
     <string name="sales_reports">Sales reports</string>
