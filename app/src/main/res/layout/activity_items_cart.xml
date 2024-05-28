@@ -83,7 +83,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/_0_0"
-    android:drawableStart="@drawable/money_icon"
     android:textSize="20sp"
     android:textStyle="bold"
     android:textColor="@color/light_blue"

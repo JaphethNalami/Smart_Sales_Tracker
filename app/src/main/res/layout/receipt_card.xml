@@ -4,22 +4,16 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:layout_marginTop="1dp"
-    android:layout_marginBottom="1dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@drawable/divider_line"
-        />
+    android:layout_marginTop="2dp"
+    android:layout_marginLeft="3dp"
+    android:layout_marginRight="3dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="vertical">
+        android:background="#74B1AAAA"
+       >
 
         <TextView
             android:id="@+id/name"
@@ -30,33 +24,55 @@
             android:layout_marginEnd="5dp"
             android:paddingStart="5dp"
             android:paddingEnd="2dp"
+            android:textSize="17sp"
             android:textColor="@color/black"
             />
 
-        <LinearLayout
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/qty"
-                android:textColor="@color/black"
-                android:layout_marginStart="5dp"
-                />
 
             <TextView
                 android:id="@+id/count_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:paddingStart="5dp"
+                android:layout_below="@id/name"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="3dp"
                 android:gravity="center"
+                android:textColor="@color/light_blue"
+                android:textSize="17sp"
                 android:text="@string/_33"
-                android:textStyle="bold"
                 />
-        </LinearLayout>
+
+        <TextView
+            android:id="@+id/x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X"
+            android:textColor="@color/light_blue"
+            android:layout_below="@id/name"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="3dp"
+            android:textSize="17sp"
+            android:layout_marginStart="2dp"
+            android:layout_toEndOf="@id/count_text_view"
+            android:layout_marginEnd="5dp"
+            />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="90"
+            android:textColor="@color/black"
+            android:layout_below="@id/name"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="3dp"
+            android:layout_toEndOf="@+id/x"
+            android:textSize="17sp" />
+
 
         <TextView
             android:id="@+id/id"
@@ -81,25 +97,21 @@
             android:layout_centerHorizontal="true"
             android:visibility="gone"
             android:layout_marginTop="2dp" />
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/price"
-            android:visibility="gone"
-            android:textColor="@color/blue"
-            android:textSize="17sp" />
 
 
         <TextView
             android:id="@+id/item_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:layout_below="@id/name"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="3dp"
             android:layout_alignParentEnd="true"
-            android:drawableStart="@drawable/money_icon"
             android:layout_marginEnd="10dp"
             android:text="55"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="17sp"
              />
     </RelativeLayout>
 

@@ -31,7 +31,8 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ViewHold
 
         holder.nameTextView.setText(item.getName());
         holder.quantityTextView.setText(String.valueOf(item.getItemCount()));
-        holder.priceTextView.setText(String.valueOf(item.getPrice()));
+        holder.priceTextView.setText(String.valueOf(item.getItemTotal()));
+        holder.priceTag.setText(String.valueOf(item.getPrice()));
     }
 
     @Override
@@ -43,12 +44,14 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ViewHold
         TextView nameTextView;
         TextView quantityTextView;
         TextView priceTextView;
+        TextView priceTag;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             nameTextView = itemView.findViewById(R.id.name);
             quantityTextView = itemView.findViewById(R.id.count_text_view);
             priceTextView = itemView.findViewById(R.id.item_total);
+            priceTag = itemView.findViewById(R.id.price);
         }
     }
 }

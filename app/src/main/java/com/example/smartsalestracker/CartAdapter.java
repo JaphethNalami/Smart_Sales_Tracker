@@ -43,7 +43,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
         Product cardItem = cardItemList.get(position);
         holder.nameTextView.setText(cardItem.getName());
         holder.countTextView.setText(String.valueOf(cardItem.getItemCount()));
-        holder.itemTotalTextView.setText(String.valueOf(cardItem.getItemTotal()));
+        String itemTotal = String.valueOf(cardItem.getItemTotal());
+        holder.itemTotalTextView.setText(String.format("Ksh %s", itemTotal));
 
         // Set onClickListeners for buttons if needed
         holder.reduceButton.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +63,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
                     holder.countTextView.setText(String.valueOf(count));
                     // update the total
                     cardItem.setItemTotal(String.valueOf(count*price));
-                    holder.itemTotalTextView.setText(String.valueOf(count*price));
+                    String itemTotal = String.valueOf(count*price);
+                    holder.itemTotalTextView.setText(String.format("Ksh %s", itemTotal));
                     // update the cart
                     Product_Cart.getInstance().addToCart(cardItem, count);
                     //toast name of item removed
@@ -73,6 +75,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
 
                     //calculate sold quantity of product
                     Product_Cart.getInstance().calculateSoldQuantity(cardItem, count);
+
+                    //set totalPrice
+                    double totalPrice = Product_Cart.getInstance().calculateTotalPrice();
+                    String totalPrice1 = String.valueOf(totalPrice);
+                    Items_Cart.total_price.setText(String.format("Ksh%s", totalPrice1));
 
                 } else {
                     Toast.makeText(v.getContext(), "Item count cannot be less than 1", Toast.LENGTH_SHORT).show();
@@ -100,7 +107,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
                 holder.countTextView.setText(String.valueOf(count));
                 // update the total
                 cardItem.setItemTotal(String.valueOf(count*price));
-                holder.itemTotalTextView.setText(String.valueOf(count*price));
+                String itemTotal = String.valueOf(count*price);
+                holder.itemTotalTextView.setText(String.format("Ksh %s", itemTotal));
                 // update the cart
                 Product_Cart.getInstance().addToCart(cardItem, count);
                 //toast name of item added
@@ -111,6 +119,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
 
                 //calculate sold quantity of product
                 Product_Cart.getInstance().calculateSoldQuantity(cardItem, count);
+
+                    //set totalPrice
+                    double totalPrice = Product_Cart.getInstance().calculateTotalPrice();
+                    String totalPrice1 = String.valueOf(totalPrice);
+                    Items_Cart.total_price.setText(String.format("Ksh%s", totalPrice1));
 
             }
                 else {

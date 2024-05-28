@@ -14,10 +14,9 @@
         android:text="@string/checkout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         />
     <TextView
         android:id="@+id/customerDetails"
@@ -94,37 +93,7 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/item"
-        android:layout_below="@id/textField_phone"
-        android:layout_marginStart="25dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/quantity"
-        android:layout_below="@id/textField_phone"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        />
-
-    <TextView
-        android:id="@+id/totalTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Total"
-        android:layout_below="@id/textField_phone"
-        android:layout_marginEnd="20dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_alignParentEnd="true"
-        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -132,10 +101,10 @@
         android:id="@+id/recyclerView"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:scrollbars="vertical"
-        android:layout_below="@id/totalTitle"
+        android:layout_below="@id/textField_phone"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         />
 
@@ -264,7 +233,7 @@
         android:orientation="horizontal"
         android:id="@+id/linear_Layout3"
         android:layout_marginTop="3dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginBottom="3dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         >

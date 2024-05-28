@@ -52,7 +52,7 @@ public class RemainingStock extends AppCompatActivity {
         fab = findViewById(R.id.fab);
 
         back.setOnClickListener(v -> {
-            onBackPressed();
+            finish();
         });
 
         fab.setOnClickListener(v -> {
