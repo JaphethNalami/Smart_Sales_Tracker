@@ -91,7 +91,7 @@ public class Items_Cart extends AppCompatActivity {
         total_price.setOnClickListener(v -> {
             double totalPrice2 = Product_Cart.getInstance().calculateTotalPrice();
             String totalPrice3 = String.valueOf(totalPrice2);
-            total_price.setText(totalPrice3);
+            total_price.setText(String.format("Ksh%s", totalPrice3));
         });
 
 

@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -87,6 +88,13 @@ public class Reports extends AppCompatActivity {
         LocalDate currentDate = LocalDate.now();
          date = currentDate.toString();
 
+        // Display the current date
+        String month1 = currentDate.getMonth().toString();
+        month1 = month1.substring(0,1).toUpperCase() + month1.substring(1).toLowerCase();
+        int day = currentDate.getDayOfMonth();
+        dateText.setText(MessageFormat.format("Today: {0} {1}", day, month1));
+
+
         // Set onclick listeners
         previousDay.setOnClickListener(v -> {
             count++;
@@ -106,9 +114,9 @@ public class Reports extends AppCompatActivity {
                      date = previousDate.toString();
 
                     if (i == 1) {
-                        dateText.setText("Yesterday: " + previousDay + " " + month);
+                        dateText.setText(MessageFormat.format("Yesterday: {0} {1}", previousDay, month));
                     } else {
-                        dateText.setText(previousDay + " " + month);
+                        dateText.setText(MessageFormat.format("{0} {1}", previousDay, month));
                     }
                 }
             }
@@ -118,12 +126,12 @@ public class Reports extends AppCompatActivity {
             //clear arraylist
             itemsArrayList.clear();
             orderList.clear();
-            totalSalesText.setText("Total Sales: 0");
-            mpesa.setText("Mpesa: 0");
-            cash.setText("Cash: 0");
-            cashText.setText("Cash: 0");
-            mpesaText.setText("Mpesa: 0");
-            salesText.setText("Sales: 0");
+            totalSalesText.setText(R.string.total_sales_0);
+            mpesa.setText(R.string.mpesa_0);
+            cash.setText(R.string.cash_0);
+            cashText.setText(R.string.cash_0);
+            mpesaText.setText(R.string.mpesa_0);
+            salesText.setText(R.string.sales_0);
 
             //clear listview
             adapter.clear();
@@ -149,12 +157,12 @@ public class Reports extends AppCompatActivity {
                     date = previousDate.toString();
 
                     if (i == 0) {
-                        dateText.setText("Today: " + previousDay + " " + month);
+                        dateText.setText(MessageFormat.format("Today: {0} {1}", previousDay, month));
                     }
                     else if (i == 1) {
-                        dateText.setText("Yesterday: " + previousDay + " " + month);
+                        dateText.setText(MessageFormat.format("Yesterday: {0} {1}", previousDay, month));
                     } else {
-                        dateText.setText(previousDay + " " + month);
+                        dateText.setText(MessageFormat.format("{0} {1}", previousDay, month));
                     }
                 }
             }
@@ -164,12 +172,12 @@ public class Reports extends AppCompatActivity {
             //clear arraylist
             itemsArrayList.clear();
             orderList.clear();
-            totalSalesText.setText("Total Sales: 0");
-            mpesa.setText("Mpesa: 0");
-            cash.setText("Cash: 0");
-            cashText.setText("Cash: 0");
-            mpesaText.setText("Mpesa: 0");
-            salesText.setText("Sales: 0");
+            totalSalesText.setText(R.string.total_sales_0);
+            mpesa.setText(R.string.mpesa_0);
+            cash.setText(R.string.cash_0);
+            cashText.setText(R.string.cash_0);
+            mpesaText.setText(R.string.mpesa_0);
+            salesText.setText(R.string.sales_0);
 
             //clear listview
             adapter.clear();
@@ -218,6 +226,7 @@ public class Reports extends AppCompatActivity {
                         return;
                     }
 
+                    assert value != null;
                     if (value.isEmpty()) {
                         // Display a message if no remaining stock data is available
                         Toast.makeText(Reports.this, "No remaining stock data available", Toast.LENGTH_SHORT).show();
@@ -228,14 +237,14 @@ public class Reports extends AppCompatActivity {
                     for (DocumentSnapshot doc : value.getDocuments()) {
                         Product product = doc.toObject(Product.class);
                         if (product != null) {
-                            //convrt quantity to integer
+                            //convert quantity to integer
                             int quantity = Integer.parseInt(product.getQuantity());
                             if (quantity > 0) {
                                 remainingStockCount++;
                             }
                         }
                     }
-                    remainingStockText.setText(remainingStockCount + "  Items");
+                    remainingStockText.setText(MessageFormat.format("{0}  Items", remainingStockCount));
                 });
 
     }
@@ -253,6 +262,7 @@ public class Reports extends AppCompatActivity {
                         return;
                     }
 
+                    assert value != null;
                     if (value.isEmpty()) {
                         // Display a message if no low stock data is available
                         Toast.makeText(Reports.this, "No low stock data available", Toast.LENGTH_SHORT).show();
@@ -263,14 +273,14 @@ public class Reports extends AppCompatActivity {
                     for (DocumentSnapshot doc : value.getDocuments()) {
                         Product product = doc.toObject(Product.class);
                         if (product != null) {
-                            //convrt quantity to integer
+                            //convert quantity to integer
                             int quantity = Integer.parseInt(product.getQuantity());
                             if (quantity == 0) {
                                 lowStockCount++;
                             }
                         }
                     }
-                    lowStockText.setText(lowStockCount + "  Items");
+                    lowStockText.setText(MessageFormat.format("{0}  Items", lowStockCount));
                 });
 
     }
@@ -294,6 +304,7 @@ public class Reports extends AppCompatActivity {
                         return;
                     }
 
+                    assert value != null;
                     if (value.isEmpty()) {
                         if (dialog.isShowing()) {
                             dialog.dismiss();
@@ -313,14 +324,14 @@ public class Reports extends AppCompatActivity {
                             adapter.notifyDataSetChanged();
                         }
                     }
-                    salesText.setText(itemsArrayList.size()+"  Items");
+                    salesText.setText(MessageFormat.format("{0}  Items", itemsArrayList.size()));
 
                     //convert to integer and add all totalPrices to get total sales
                     float totalSales = 0;
                     for (ReportClass reportClass : itemsArrayList) {
                         totalSales += Float.parseFloat(reportClass.getTotalPrice());
                     }
-                    totalSalesText.setText("KSH: " + totalSales);
+                    totalSalesText.setText(MessageFormat.format("KSH: {0}", totalSales));
 
                     //get and count the number of mpesa and cash payments
                     int mpesaCount = 0;
@@ -331,7 +342,7 @@ public class Reports extends AppCompatActivity {
                     for (ReportClass reportClass : itemsArrayList) {
                         if (reportClass.getPaymentMethod().equals("Mpesa")) {
                             mpesaCount++;
-                            // accumulate totalPrice for mpesa payments
+                            // accumulate totalPrice for Mpesa payments
                             mpesaTotal += Float.parseFloat(reportClass.getTotalPrice());
                         } else {
                             cashCount++;
@@ -340,10 +351,10 @@ public class Reports extends AppCompatActivity {
                         }
                     }
                     // Update TextViews with the accumulated totals
-                    mpesa.setText(mpesaCount +"  Items");
-                    cash.setText( cashCount +"  Items");
-                    mpesaText.setText("KSH: " + mpesaTotal);
-                    cashText.setText("KSH: " + cashTotal);
+                    mpesa.setText(MessageFormat.format("{0}  Items", mpesaCount));
+                    cash.setText(MessageFormat.format("{0}  Items", cashCount));
+                    mpesaText.setText(MessageFormat.format("KSH: {0}", mpesaTotal));
+                    cashText.setText(MessageFormat.format("KSH: {0}", cashTotal));
 
                     if (dialog.isShowing()) {
                         dialog.dismiss();

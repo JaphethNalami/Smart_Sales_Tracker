@@ -126,8 +126,7 @@ public class SalesAnalysis extends AppCompatActivity {
 
         //back button
         back.setOnClickListener(v -> {
-            //finish();
-            startActivity(new Intent(SalesAnalysis.this, Navigation_menu.class));
+            finish();
         });
 
     }

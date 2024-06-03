@@ -83,8 +83,7 @@ public class Item_Management extends AppCompatActivity {
 
         back = findViewById(R.id.back);
         back.setOnClickListener(v -> {
-            Intent intent = new Intent(Item_Management.this, Home_Page.class);
-            startActivity(intent);
+            finish();
         });
 
 

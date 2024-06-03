@@ -80,8 +80,7 @@ public class CustomerDisplay extends AppCompatActivity {
         });
 
         back.setOnClickListener(v -> {
-            Intent intent = new Intent(CustomerDisplay.this, Navigation_menu.class);
-            startActivity(intent);
+            finish();
         });
 
         recyclerView.setHasFixedSize(true);

@@ -116,6 +116,10 @@
     <string name="sales">SALES</string>
     <string name="sales_reports">Sales reports</string>
     <string name="_0_items">0 Items</string>
+    <string name="total_sales_0">Total Sales: 0</string>
+    <string name="mpesa_0">Mpesa: 0</string>
+    <string name="cash_0">Cash: 0</string>
+    <string name="sales_0">Sales: 0</string>
 
     <string-array name="shop_array">
         <item>Retail</item>
