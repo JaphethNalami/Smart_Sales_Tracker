@@ -19,9 +19,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,6 +35,7 @@ public class Update_page extends AppCompatActivity {
     TextView Category, Barcode, Id,Units;
     Button update,delete;
     ImageButton back;
+    ShapeableImageView productImage1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class Update_page extends AppCompatActivity {
         update = findViewById(R.id.update);
         delete = findViewById(R.id.delete);
         back = findViewById(R.id.back_button);
+        productImage1 = findViewById(R.id.image);
 
         // Get product info from intent
         String productName = getIntent().getStringExtra("productName");
@@ -71,6 +75,9 @@ public class Update_page extends AppCompatActivity {
         Id.setText(productId);
         Units.setText(productQuantity);
 
+        //set image
+        Glide.with(this).load(productImage).placeholder(R.drawable.blue_circle).into(productImage1);
+
         // Initialize Firestore
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -89,7 +96,6 @@ public class Update_page extends AppCompatActivity {
             //back button
         back.setOnClickListener(v -> {
             // Go back to item management page
-            startActivity(new Intent(Update_page.this, Item_Management.class));
             finish();
         });
 
@@ -123,7 +129,7 @@ public class Update_page extends AppCompatActivity {
                                 dialog.dismiss();
                                 Toast.makeText(Update_page.this, updatedName + " updated successfully", Toast.LENGTH_SHORT).show();
                                 //move to item management page
-                                startActivity(new Intent(Update_page.this, Item_Management.class));
+                                finish();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {

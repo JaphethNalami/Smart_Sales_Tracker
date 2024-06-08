@@ -12,12 +12,8 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -40,24 +36,23 @@ public class Home_Page extends AppCompatActivity {
     MyAdapter myAdapter;
     FirebaseFirestore db;
     private FirebaseAuth mAuth;
+    FirebaseUser user;
     ImageButton btn_navigation,btn_cart,btn_logout;
-    Button recommender,inventory,analysis,reports,clients;
+    Button recommender,inventory,analysis,reports,clients,user_profile;
     TextView username;
     static TextView cart_count,current_total1;
 
     Dialog dialog;
-    private FloatingActionButton add;
-
+    FloatingActionButton add;
     SearchView searchView;
+    String userId;
 
     // SwipeRefreshLayout
     private SwipeRefreshLayout mySwipeRefreshLayout;
-
     private boolean doubleBackToExitPressedOnce = false;
     private static final int BACK_PRESS_DELAY = 2000; // 2 second
 
     // Override the onBackPressed method
-
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -65,20 +60,15 @@ public class Home_Page extends AppCompatActivity {
             finishAffinity();
             return;
         }
-
         this.doubleBackToExitPressedOnce = true;
         Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
-
         new Handler().postDelayed(() -> doubleBackToExitPressedOnce=false, BACK_PRESS_DELAY);
     }
-
-    //search filter
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-
 
         // Initialize views
         recyclerView = findViewById(R.id.recycler_view);
@@ -97,12 +87,19 @@ public class Home_Page extends AppCompatActivity {
         analysis = findViewById(R.id.analysis);
         reports = findViewById(R.id.reports);
         clients = findViewById(R.id.clients);
+        user_profile = findViewById(R.id.profile);
+
+        //firebase initialization
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        user = mAuth.getCurrentUser();
+        assert user != null;
+        userId = user.getUid();
 
 
         // Add button
         add.setOnClickListener(v -> {
             startActivity(new Intent(Home_Page.this, Item_Add.class));
-
         });
 
         // Logout button
@@ -152,7 +149,10 @@ public class Home_Page extends AppCompatActivity {
             startActivity(new Intent(Home_Page.this, CustomerDisplay.class));
         });
 
-
+        //user_profile button
+        user_profile.setOnClickListener(v -> {
+            startActivity(new Intent(Home_Page.this, User_Profile_Update.class));
+        });
 
         // call method for search on click
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -184,27 +184,31 @@ public class Home_Page extends AppCompatActivity {
         myAdapter = new MyAdapter(Home_Page.this, productArrayList);
         recyclerView.setAdapter(myAdapter);
 
-        //get data from firebase method
-        db = FirebaseFirestore.getInstance();
-        EventChangeListener();
-
         //get current user details method
         CurrentUserDetails();
+        EventChangeListener();
 
         // SwipeRefreshLayout
         mySwipeRefreshLayout.setOnRefreshListener(() -> {
-                    //reload activity
-                    //finish();
-                    //startActivity(getIntent());
 
             //set the adapter again
             myAdapter = new MyAdapter(Home_Page.this, productArrayList);
             recyclerView.setAdapter(myAdapter);
-
             mySwipeRefreshLayout.setRefreshing(false);
                 }
         );
 
+        //check if cart is empty
+        if (Product_Cart.getInstance().getSelectedProducts().isEmpty()) {
+            //make cart count invisible
+            cart_count.setVisibility(View.INVISIBLE);
+
+        } else {
+            //make cart count visible
+            cart_count.setVisibility(View.VISIBLE);
+            //set the cart count
+            cart_count.setText(String.valueOf(Product_Cart.getInstance().getSelectedProducts().size()));
+        }
     }
 
     // Filter method
@@ -219,10 +223,7 @@ public class Home_Page extends AppCompatActivity {
     }
 
     private void CurrentUserDetails() {
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
-        String user1 = user.getUid();
-        db.collection(user1).document("User_Details").get().addOnCompleteListener(task -> {
+        db.collection(userId).document("User_Details").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 username.setText(task.getResult().getString("name"));
             }
@@ -230,10 +231,7 @@ public class Home_Page extends AppCompatActivity {
     }
 
     private void EventChangeListener() {
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user1 = mAuth.getCurrentUser();
-        String user2 = user1.getUid();
-        db.collection(user2).document("Shop").collection("Products").addSnapshotListener((new EventListener<QuerySnapshot>() {
+        db.collection(userId).document("Shop").collection("Products").addSnapshotListener((new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
@@ -243,9 +241,8 @@ public class Home_Page extends AppCompatActivity {
                     }
                     return;
                 }
-                for (Product product : value.toObjects(Product.class)) {
-                    productArrayList.add(product);
-                }
+                assert value != null;
+                productArrayList.addAll(value.toObjects(Product.class));
                 myAdapter.notifyDataSetChanged();
                 if (dialog.isShowing()) {
                     dialog.dismiss();

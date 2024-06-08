@@ -141,6 +141,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
                 notifyItemRangeChanged(position, cardItemList.size());
                 Product_Cart.getInstance().removeFromCart(cardItem);
                 Toast.makeText(v.getContext(), cardItem.getName()+" removed from cart", Toast.LENGTH_SHORT).show();
+
+                //set total price
+                double totalPrice = Product_Cart.getInstance().calculateTotalPrice();
+                String totalPrice1 = String.valueOf(totalPrice);
+                Items_Cart.total_price.setText(String.format("Ksh%s", totalPrice1));
             }
         });
 
