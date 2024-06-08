@@ -73,6 +73,11 @@ public class Navigation_menu extends AppCompatActivity {
             startActivity(new Intent(Navigation_menu.this, Reports.class));
         });
 
+        //btn_user_profile click event
+        btn_user_profile.setOnClickListener(v -> {
+            startActivity(new Intent(Navigation_menu.this, User_Profile_Update.class));
+        });
+
         CurrentShopDetails();
 
         //get current date

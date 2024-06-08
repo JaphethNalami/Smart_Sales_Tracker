@@ -207,24 +207,13 @@
                 android:layout_marginEnd="5dp"/>
 
             <Button
-                android:id="@+id/books"
+                android:id="@+id/profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Books"
+                android:text="Profile"
                 android:background="@drawable/button_shape"
                 android:textColor="@color/white"
                 android:layout_marginEnd="5dp"/>
-
-            <Button
-                android:id="@+id/houses"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Houses"
-                android:background="@drawable/button_shape"
-                android:textColor="@color/white"
-                android:layout_marginEnd="5dp"/>
-
-
 
         </LinearLayout>
     </HorizontalScrollView>
@@ -283,6 +272,7 @@
         app:backgroundTint="@color/light_blue"
         app:fabSize="normal"
         android:id="@+id/add"
+        android:contentDescription="@string/refresh"
         />
     </RelativeLayout>
 

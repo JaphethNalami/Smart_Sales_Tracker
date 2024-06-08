@@ -120,6 +120,16 @@
     <string name="mpesa_0">Mpesa: 0</string>
     <string name="cash_0">Cash: 0</string>
     <string name="sales_0">Sales: 0</string>
+    <string name="user_profile">User Profile</string>
+    <string name="name">Name:</string>
+    <string name="john_doe">John Doe</string>
+    <string name="email1">Email:</string>
+    <string name="phone">Phone:</string>
+    <string name="_0712345678">0712345678</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="dismiss_edit">Dismiss Edit</string>
+    <string name="user_name">User Name</string>
+    <string name="johndoe_gmail_com">johndoe@gmail.com</string>
 
     <string-array name="shop_array">
         <item>Retail</item>

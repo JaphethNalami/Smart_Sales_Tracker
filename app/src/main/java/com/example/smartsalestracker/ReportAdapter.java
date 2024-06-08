@@ -56,6 +56,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ProductVie
                 intent.putExtra("productId", product.itemId);
                 intent.putExtra("productCategory", product.category);
                 intent.putExtra("productBarcode", product.barcode);
+                intent.putExtra("productImage", product.image);
                 context.startActivity(intent);
             }
         });
