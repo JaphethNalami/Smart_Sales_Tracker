@@ -231,7 +231,7 @@ public class Home_Page extends AppCompatActivity {
     }
 
     private void EventChangeListener() {
-        db.collection(userId).document("Shop").collection("Products").addSnapshotListener((new EventListener<QuerySnapshot>() {
+        db.collection(userId).document("Shop").collection("Products").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
@@ -243,12 +243,16 @@ public class Home_Page extends AppCompatActivity {
                 }
                 assert value != null;
                 productArrayList.addAll(value.toObjects(Product.class));
+
+                //sort the products by name
+                productArrayList.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
+
                 myAdapter.notifyDataSetChanged();
                 if (dialog.isShowing()) {
                     dialog.dismiss();
                 }
             }
-        }));
+        });
 
     }
 }
