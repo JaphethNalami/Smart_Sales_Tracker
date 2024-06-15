@@ -115,6 +115,7 @@ public class CustomerDisplay extends AppCompatActivity {
                 for (Customer customer : value.toObjects(Customer.class)) {
                     customerArrayList.add(customer);
                 }
+                customerArrayList.sort((o1, o2) -> o2.getCustomerPeriod().compareTo(o1.getCustomerPeriod()));
                 // Notify the adapter that the data set has changed
                 customerAdapter.notifyDataSetChanged();
 

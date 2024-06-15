@@ -124,9 +124,9 @@ public class Item_Management extends AppCompatActivity {
                     }
                     return;
                 }
-                for (Product product : value.toObjects(Product.class)) {
-                    productArrayList.add(product);
-                }
+                assert value != null;
+                productArrayList.addAll(value.toObjects(Product.class));
+                productArrayList.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
                 myAdapter1.notifyDataSetChanged();
                 if (dialog.isShowing()) {
                     dialog.dismiss();
