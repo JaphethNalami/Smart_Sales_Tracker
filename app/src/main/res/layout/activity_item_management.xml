@@ -9,17 +9,14 @@
     tools:context=".Item_Management">
 
     <ImageButton
-        android:background="#432196F3"
+        android:background="@color/transparent"
         android:layout_width="51dp"
-        android:layout_height="51dp"
-        android:src="@drawable/exit_icon"
+        android:layout_height="48dp"
+        android:src="@drawable/baseline_arrow_back_24"
         android:id="@+id/back"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="19dp"
         android:layout_marginStart="15dp"
         android:contentDescription="@string/back_button"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
         android:layout_marginEnd="13dp"
         />
 
@@ -42,10 +39,10 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/textView"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:clipToPadding="false"
-        android:paddingTop="10dp"
+        android:paddingTop="1dp"
         android:paddingBottom="10dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="1" />
