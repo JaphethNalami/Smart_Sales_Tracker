@@ -191,6 +191,15 @@ public class Home_Page extends AppCompatActivity {
         // SwipeRefreshLayout
         mySwipeRefreshLayout.setOnRefreshListener(() -> {
 
+            //clear the arraylist
+            productArrayList.clear();
+
+            //notify the adapter
+            myAdapter.notifyDataSetChanged();
+
+            //call the method to fetch the data
+            EventChangeListener();
+
             //set the adapter again
             myAdapter = new MyAdapter(Home_Page.this, productArrayList);
             recyclerView.setAdapter(myAdapter);
