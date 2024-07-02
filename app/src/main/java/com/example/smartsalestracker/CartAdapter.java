@@ -1,5 +1,6 @@
 package com.example.smartsalestracker;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -19,10 +20,12 @@ import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder> {
 
+    // List to hold the cart items
     private final List<Product> cardItemList;
-    private Context context;
+    // Context for accessing resources
+    private final Context context;
 
-    // Constructor to initialize the cardItemList
+    // Constructor to initialize the cardItemList and context
     public CartAdapter(List<Product> cardItemList, Context context) {
         this.cardItemList = cardItemList;
         this.context = context;
@@ -32,17 +35,22 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
     @NonNull
     @Override
     public CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // create a new view
+        // Inflate the cart card layout
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_card, parent, false);
         return new CardViewHolder(view);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
+    @SuppressLint("NotifyDataSetChanged")
     @Override
-    public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CardViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        // Get the current product item
         Product cardItem = cardItemList.get(position);
+        // Set product name
         holder.nameTextView.setText(cardItem.getName());
+        // Set product count
         holder.countTextView.setText(String.valueOf(cardItem.getItemCount()));
+        // Set product total price
         String itemTotal = String.valueOf(cardItem.getItemTotal());
         holder.itemTotalTextView.setText(String.format("Ksh %s", itemTotal));
 
@@ -50,84 +58,78 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
         holder.reduceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // get current value of item count
+                // Get current value of item count and price
                 String count1 = cardItem.getItemCount();
                 String item_price = cardItem.getPrice();
-                // decrement the value
+                // Convert to integers
                 int count = Integer.parseInt(count1);
                 int price = Integer.parseInt(item_price);
+                // Check if count is greater than 1 to reduce
                 if (count > 1) {
                     count--;
-                    // set the new value
+                    // Set the new item count
                     cardItem.setItemCount(String.valueOf(count));
                     holder.countTextView.setText(String.valueOf(count));
-                    // update the total
-                    cardItem.setItemTotal(String.valueOf(count*price));
-                    String itemTotal = String.valueOf(count*price);
+                    // Update the total price
+                    cardItem.setItemTotal(String.valueOf(count * price));
+                    String itemTotal = String.valueOf(count * price);
                     holder.itemTotalTextView.setText(String.format("Ksh %s", itemTotal));
-                    // update the cart
+                    // Update the cart with the new count
                     Product_Cart.getInstance().addToCart(cardItem, count);
-                    //toast name of item removed
-                    Toast.makeText(v.getContext(), cardItem.getName()+" reduced to" + count, Toast.LENGTH_SHORT).show();
-
-                    //calculate remaining quantity of product
+                    // Show toast message for the reduced item
+                    Toast.makeText(v.getContext(), cardItem.getName() + " reduced to " + count, Toast.LENGTH_SHORT).show();
+                    // Calculate remaining quantity of product
                     Product_Cart.getInstance().calculateRemainingQuantity(cardItem, count);
-
-                    //calculate sold quantity of product
+                    // Calculate sold quantity of product
                     Product_Cart.getInstance().calculateSoldQuantity(cardItem, count);
-
-                    //set totalPrice
+                    // Update total price
                     double totalPrice = Product_Cart.getInstance().calculateTotalPrice();
                     String totalPrice1 = String.valueOf(totalPrice);
-                    Items_Cart.total_price.setText(String.format("Ksh%s", totalPrice1));
-
+                    Items_Cart.total_price.setText(String.format("Ksh %s", totalPrice1));
                 } else {
+                    // Show toast message if count is less than 1
                     Toast.makeText(v.getContext(), "Item count cannot be less than 1", Toast.LENGTH_SHORT).show();
+                }
             }
-        }
         });
 
         holder.incrementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // get current value of item count
+                // Get current value of item count and price
                 String count1 = cardItem.getItemCount();
                 String item_price = cardItem.getPrice();
-                //get quantity of item
+                // Get the quantity of the item
                 String quantity = cardItem.getQuantity();
-
-                // increment the value
+                // Convert to integers
                 int quantity1 = Integer.parseInt(quantity);
                 int count = Integer.parseInt(count1);
                 int price = Integer.parseInt(item_price);
-                if (count < quantity1){
-                count++;
-                // set the new value
-                cardItem.setItemCount(String.valueOf(count));
-                holder.countTextView.setText(String.valueOf(count));
-                // update the total
-                cardItem.setItemTotal(String.valueOf(count*price));
-                String itemTotal = String.valueOf(count*price);
-                holder.itemTotalTextView.setText(String.format("Ksh %s", itemTotal));
-                // update the cart
-                Product_Cart.getInstance().addToCart(cardItem, count);
-                //toast name of item added
-                Toast.makeText(v.getContext(), cardItem.getName()+" incremented to" + count, Toast.LENGTH_SHORT).show();
-
-                //calculate remaining quantity of product
-                Product_Cart.getInstance().calculateRemainingQuantity(cardItem, count);
-
-                //calculate sold quantity of product
-                Product_Cart.getInstance().calculateSoldQuantity(cardItem, count);
-
-                    //set totalPrice
+                // Check if count is less than quantity to increment
+                if (count < quantity1) {
+                    count++;
+                    // Set the new item count
+                    cardItem.setItemCount(String.valueOf(count));
+                    holder.countTextView.setText(String.valueOf(count));
+                    // Update the total price
+                    cardItem.setItemTotal(String.valueOf(count * price));
+                    String itemTotal = String.valueOf(count * price);
+                    holder.itemTotalTextView.setText(String.format("Ksh %s", itemTotal));
+                    // Update the cart with the new count
+                    Product_Cart.getInstance().addToCart(cardItem, count);
+                    // Show toast message for the incremented item
+                    Toast.makeText(v.getContext(), cardItem.getName() + " incremented to " + count, Toast.LENGTH_SHORT).show();
+                    // Calculate remaining quantity of product
+                    Product_Cart.getInstance().calculateRemainingQuantity(cardItem, count);
+                    // Calculate sold quantity of product
+                    Product_Cart.getInstance().calculateSoldQuantity(cardItem, count);
+                    // Update total price
                     double totalPrice = Product_Cart.getInstance().calculateTotalPrice();
                     String totalPrice1 = String.valueOf(totalPrice);
-                    Items_Cart.total_price.setText(String.format("Ksh%s", totalPrice1));
-
-            }
-                else {
-                    Toast.makeText(v.getContext(), "No more"+cardItem.getName()+"available", Toast.LENGTH_SHORT).show();
+                    Items_Cart.total_price.setText(String.format("Ksh %s", totalPrice1));
+                } else {
+                    // Show toast message if no more quantity is available
+                    Toast.makeText(v.getContext(), "No more " + cardItem.getName() + " available", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -135,11 +137,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //delete the item from the cart
+                // Remove the item from the cart
                 cardItemList.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, cardItemList.size());
                 Product_Cart.getInstance().removeFromCart(cardItem);
+                // Show toast message for the removed item
                 Toast.makeText(v.getContext(), cardItem.getName()+" removed from cart", Toast.LENGTH_SHORT).show();
 
                 //set total price
