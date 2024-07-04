@@ -1,5 +1,6 @@
 package com.example.smartsalestracker;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -101,6 +102,7 @@ public class CustomerDisplay extends AppCompatActivity {
         dialog.show();
 
         db.collection(userId).document("Shop").collection("Customers_Details").addSnapshotListener((new EventListener<QuerySnapshot>() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
@@ -112,9 +114,8 @@ public class CustomerDisplay extends AppCompatActivity {
                 }
                 customerArrayList.clear(); // Clear existing data
 
-                for (Customer customer : value.toObjects(Customer.class)) {
-                    customerArrayList.add(customer);
-                }
+                assert value != null;
+                customerArrayList.addAll(value.toObjects(Customer.class));
                 customerArrayList.sort((o1, o2) -> o2.getCustomerPeriod().compareTo(o1.getCustomerPeriod()));
                 // Notify the adapter that the data set has changed
                 customerAdapter.notifyDataSetChanged();
