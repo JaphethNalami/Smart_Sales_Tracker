@@ -1,13 +1,14 @@
 package com.example.smartsalestracker;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -26,19 +27,28 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Item_Management extends AppCompatActivity {
 
 
     RecyclerView recyclerView;
+    Spinner spinner;
+    Button sortCategory;
     ArrayList<Product> productArrayList;
     UpdateAdapter myAdapter1;
     FirebaseFirestore db;
     private FirebaseAuth mAuth;
     FloatingActionButton fab;
+
+    FirebaseUser user;
+    String userId;
+    String categorySort;
+
 
     Dialog dialog;
     ImageButton back;
@@ -75,6 +85,14 @@ public class Item_Management extends AppCompatActivity {
 
         // Initialize views
         fab = findViewById(R.id.refresh);
+        spinner = findViewById(R.id.categorySpinner);
+        sortCategory = findViewById(R.id.sort);
+
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        assert user != null;
+        userId = user.getUid();
+
         // Refresh button
         fab.setOnClickListener(v -> {
             productArrayList.clear();
@@ -84,6 +102,19 @@ public class Item_Management extends AppCompatActivity {
         back = findViewById(R.id.back);
         back.setOnClickListener(v -> {
             finish();
+        });
+
+        // Sort by category
+        sortCategory.setOnClickListener(v -> {
+            String category = spinner.getSelectedItem().toString();
+            if (category.equals("All")) {
+                productArrayList.clear();
+                EventChangeListener();
+            } else {
+                productArrayList.clear();
+                categorySort = category;
+                CategoryListener();
+                }
         });
 
 
@@ -108,13 +139,36 @@ public class Item_Management extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         EventChangeListener();
 
+        ObtainCategory();
+
+    }
+
+    private void ObtainCategory() {
+
+        db.collection(userId).document("Shop").collection("Categories").get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    ArrayList<String> categories = new ArrayList<>();
+                    categories.add(0, "All");
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        String categoryName = document.getString("name");
+                        categories.add(categoryName);
+                    }
+
+                    // For example, if you have a spinner:
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(Item_Management.this, android.R.layout.simple_spinner_item, categories);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner.setAdapter(adapter);
+
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("Error", Objects.requireNonNull(e.getMessage()));
+                });
+
+
     }
 
     private void EventChangeListener() {
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user1 = mAuth.getCurrentUser();
-        String user2 = user1.getUid();
-        db.collection(user2).document("Shop").collection("Products").addSnapshotListener((new EventListener<QuerySnapshot>() {
+        db.collection(userId).document("Shop").collection("Products").addSnapshotListener((new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
@@ -126,6 +180,34 @@ public class Item_Management extends AppCompatActivity {
                 }
                 assert value != null;
                 productArrayList.addAll(value.toObjects(Product.class));
+                productArrayList.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
+                myAdapter1.notifyDataSetChanged();
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+            }
+        }));
+
+    }
+
+    private void CategoryListener() {
+        db.collection(userId).document("Shop").collection("Products").addSnapshotListener((new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                if (error != null) {
+                    if (dialog.isShowing()) {
+                        dialog.dismiss();
+                    }
+                    return;
+                }
+                assert value != null;
+                //add items whose category matches the selected category
+                for (QueryDocumentSnapshot document : value) {
+                    if (Objects.equals(document.getString("category"), categorySort)) {
+                        productArrayList.add(document.toObject(Product.class));
+                    }
+                }
                 productArrayList.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
                 myAdapter1.notifyDataSetChanged();
                 if (dialog.isShowing()) {
