@@ -1,5 +1,6 @@
 package com.example.smartsalestracker;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -17,9 +18,9 @@ import java.util.ArrayList;
 
 public class CustomerDetailsAdapter extends RecyclerView.Adapter<CustomerDetailsAdapter.CustomerViewHolder> {
 
-    private Context context;
-    private ArrayList<Customer> customerArrayList;
-    private LayoutInflater inflater;
+    private final Context context;
+    private final ArrayList<Customer> customerArrayList;
+    private final LayoutInflater inflater;
 
     public CustomerDetailsAdapter(Context context, ArrayList<Customer> customerArrayList) {
         this.context = context;
@@ -34,6 +35,7 @@ public class CustomerDetailsAdapter extends RecyclerView.Adapter<CustomerDetails
         return new CustomerViewHolder(v);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull CustomerViewHolder holder, int position) {
         Customer customer = customerArrayList.get(position);
@@ -47,16 +49,13 @@ public class CustomerDetailsAdapter extends RecyclerView.Adapter<CustomerDetails
         holder.orders.setText(orders + " Item(s)");
 
         // Set click listener
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Open customer orders page and pass customer info
-                Intent intent = new Intent(context, CustomerOrdersDisplay.class);
-                intent.putExtra("customerName", customer.getCustomerName());
-                intent.putExtra("customerPhone", customer.getphoneNumber());
-                // Add more data as needed
-                context.startActivity(intent);
-            }
+        holder.itemView.setOnClickListener(v -> {
+            // Open customer orders page and pass customer info
+            Intent intent = new Intent(context, CustomerOrdersDisplay.class);
+            intent.putExtra("customerName", customer.getCustomerName());
+            intent.putExtra("customerPhone", customer.getphoneNumber());
+            // Add more data as needed
+            context.startActivity(intent);
         });
 
         //get stored date
@@ -101,7 +100,7 @@ public class CustomerDetailsAdapter extends RecyclerView.Adapter<CustomerDetails
         return customerArrayList.size();
     }
 
-    public class CustomerViewHolder extends RecyclerView.ViewHolder {
+    public static class CustomerViewHolder extends RecyclerView.ViewHolder {
 
         TextView customerName, customerPhone, orders, period,nameInitial;
 
