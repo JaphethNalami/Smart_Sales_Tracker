@@ -251,6 +251,10 @@ public class Home_Page extends AppCompatActivity {
                     return;
                 }
                 assert value != null;
+                //clear the arraylist
+                productArrayList.clear();
+
+                //add all products to the arraylist
                 productArrayList.addAll(value.toObjects(Product.class));
 
                 //sort the products by name
