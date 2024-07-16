@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ViewHolder> {
-
+//     // Define the data
     private final List<Product> receiptItemList;
 
     public ReceiptAdapter(List<Product> receiptItemList, CheckoutPage checkoutPage) {
@@ -20,12 +20,13 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ViewHold
 
     @NonNull
     @Override
+    // Create new views (invoked by the layout manager)
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.receipt_card, parent, false);
         return new ViewHolder(view);
     }
-
     @Override
+    // Replace the contents of a view (invoked by the layout manager)
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product item = receiptItemList.get(position);
 
@@ -36,11 +37,14 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ViewHold
     }
 
     @Override
+    // Return the size of the list
     public int getItemCount() {
         return receiptItemList.size();
     }
 
+    // Define the ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        // Define the views
         TextView nameTextView;
         TextView quantityTextView;
         TextView priceTextView;
@@ -48,6 +52,7 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ViewHold
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            // Initialize the views
             nameTextView = itemView.findViewById(R.id.name);
             quantityTextView = itemView.findViewById(R.id.count_text_view);
             priceTextView = itemView.findViewById(R.id.item_total);

@@ -98,6 +98,7 @@ public class CheckoutPage extends AppCompatActivity {
          currentDate = dateFormat.format(new Date());
 
         //getting the payment method selected by the user
+        //get value selected by the user from the radio group
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId == R.id.cash) {
                 Toast.makeText(this, "Cash", Toast.LENGTH_SHORT).show();
@@ -250,7 +251,7 @@ public class CheckoutPage extends AppCompatActivity {
 
         });
     }
-
+//method to save the sold products to the database
     private void soldProducts() {
         for (final Product product : cartItems) {
             Map<String, Object> soldData = new HashMap<>();
@@ -301,6 +302,7 @@ public class CheckoutPage extends AppCompatActivity {
         customerData.put("customerOrder", order);
         customerData.put("customerGender", gender);
 
+
         db.collection(userId)
                 .document("Shop")
                 .collection("Customers_Details")
@@ -318,6 +320,7 @@ public class CheckoutPage extends AppCompatActivity {
     //method to save the order to the database
     private void customerOrders() {
 
+        // Save order to the database
         for (final Product product : cartItems) {
             Map<String, Object> orderData = new HashMap<>();
             orderData.put("productName", product.getName());
@@ -342,6 +345,7 @@ public class CheckoutPage extends AppCompatActivity {
                             //updateQuantities();
                         }
                     })
+                    //if the order fails to save
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
@@ -382,6 +386,7 @@ public class CheckoutPage extends AppCompatActivity {
 
                             }
                         })
+                        //if the quantity fails to update
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
@@ -393,7 +398,7 @@ public class CheckoutPage extends AppCompatActivity {
                             }
                         });
             }
-
+//clear the cart
         Product_Cart.getInstance().getSelectedProducts().clear();
         receiptAdapter.notifyDataSetChanged();
 
