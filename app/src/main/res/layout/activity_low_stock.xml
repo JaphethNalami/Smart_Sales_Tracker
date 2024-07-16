@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="@string/remaining_stock"
+        android:text="@string/low_stock_inventory"
         android:textSize="24sp"
         android:textStyle="bold" />
 

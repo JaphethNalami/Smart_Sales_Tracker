@@ -103,6 +103,10 @@ public class LowStock extends AppCompatActivity {
                     }
                     return;
                 }
+
+                //clear arraylist
+                productArrayList.clear();
+
                 for (Product product : value.toObjects(Product.class)) {
 
                     // Check if quantity is less than 1
