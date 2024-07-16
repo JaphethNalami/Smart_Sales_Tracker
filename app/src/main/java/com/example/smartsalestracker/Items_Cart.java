@@ -20,6 +20,7 @@ import java.util.Map;
 
 public class Items_Cart extends AppCompatActivity {
 
+    // Define the views
     ImageButton back;
    static TextView clear_cart, total_price;
     Button checkout;
@@ -28,6 +29,7 @@ public class Items_Cart extends AppCompatActivity {
     ArrayList<Product> cartItems;
 
     @Override
+    // Create the activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
@@ -38,6 +40,7 @@ public class Items_Cart extends AppCompatActivity {
             return insets;
         });
 
+        // Initialize the views
         back = findViewById(R.id.back_button);
         clear_cart = findViewById(R.id.clear_cart);
         total_price = findViewById(R.id.total_amount);
@@ -45,18 +48,21 @@ public class Items_Cart extends AppCompatActivity {
         recyclerView = findViewById(R.id.cart_recycler_view);
         cartItems = new ArrayList<>();
 
+        // Set click listeners for the buttons
         back.setOnClickListener(v -> {
             //go back to the home page activity
             startActivity(new Intent(Items_Cart.this, Home_Page.class));
             //onBackPressed();
         });
 
+        // Clear the cart
         clear_cart.setOnClickListener(v -> {
             // Clear the cart
             Product_Cart.getInstance().getSelectedProducts().clear();
             cartAdapter.notifyDataSetChanged();
         });
 
+        // Move to the checkout page
         checkout.setOnClickListener(v -> {
             // move to the checkout page
             startActivity(new Intent(Items_Cart.this, CheckoutPage.class));
@@ -84,13 +90,16 @@ public class Items_Cart extends AppCompatActivity {
         double totalPrice = Product_Cart.getInstance().calculateTotalPrice();
         //convert the total price to string
         String totalPrice1 = String.valueOf(totalPrice);
-
+        //set the total price to the text view
         total_price.setText(totalPrice1);
 
         //set click listener for the total price text view to reload the value
         total_price.setOnClickListener(v -> {
+            // Calculate total price of all items in the cart
             double totalPrice2 = Product_Cart.getInstance().calculateTotalPrice();
+            //convert the total price to string
             String totalPrice3 = String.valueOf(totalPrice2);
+            //set the total price to the text view
             total_price.setText(String.format("Ksh%s", totalPrice3));
         });
 

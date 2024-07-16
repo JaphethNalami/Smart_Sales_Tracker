@@ -43,12 +43,14 @@ public class Product_Cart {
         return selectedProducts;
     }
 
+    //calculate total price of selected products
     public double calculateTotalPrice() {
         double totalPrice = 0;
         for (Map.Entry<Product, Integer> entry : selectedProducts.entrySet()) {
             Product product = entry.getKey();
             totalPrice += Double.parseDouble(product.getItemTotal());
         }
+        //return the total price
         return totalPrice;
     }
 
@@ -61,8 +63,10 @@ public class Product_Cart {
 
     //calculate sold quantity of product
     public void calculateSoldQuantity(Product product, int count) {
+        //get the sold quantity of the product
         int soldQuantity = Integer.parseInt(product.getSoldQuantity());
         soldQuantity += count;
+        //set the sold quantity of the product
         product.setSoldQuantity(String.valueOf(soldQuantity));
     }
 
