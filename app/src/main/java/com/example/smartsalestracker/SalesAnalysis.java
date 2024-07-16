@@ -245,6 +245,9 @@ public class SalesAnalysis extends AppCompatActivity {
                     }
                     return;
                 }
+                //clear array list
+                productArrayList.clear();
+
                 for (Product product : value.toObjects(Product.class)) {
                     productArrayList.add(product);
                 }

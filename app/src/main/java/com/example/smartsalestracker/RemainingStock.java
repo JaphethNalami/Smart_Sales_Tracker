@@ -103,6 +103,9 @@ public class RemainingStock extends AppCompatActivity {
                     }
                     return;
                 }
+                //clear arraylist
+                productArrayList.clear();
+
                 for (Product product : value.toObjects(Product.class)) {
 
                     // Check if quantity is less than 1

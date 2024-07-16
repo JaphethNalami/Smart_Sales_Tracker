@@ -313,6 +313,10 @@ public class Reports extends AppCompatActivity {
                         Toast.makeText(Reports.this, "No sales data available for the selected date", Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    // Clear the lists before fetching data
+                    itemsArrayList.clear();
+                    orderList.clear();
+
                     // Add retrieved items to the list
                     for (DocumentSnapshot doc : value.getDocuments()) {
                         ReportClass reportClass = doc.toObject(ReportClass.class);
@@ -324,6 +328,7 @@ public class Reports extends AppCompatActivity {
                             adapter.notifyDataSetChanged();
                         }
                     }
+
                     salesText.setText(MessageFormat.format("{0}  Items", itemsArrayList.size()));
 
                     //convert to integer and add all totalPrices to get total sales
