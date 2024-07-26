@@ -46,6 +46,7 @@ public class Reports extends AppCompatActivity {
     private ArrayAdapter<String> adapter;
     private ArrayList<String> orderList;
     private ArrayList<ReportClass> itemsArrayList;
+    ImageButton back;
 
 
     @Override
@@ -69,6 +70,7 @@ public class Reports extends AppCompatActivity {
         currentDay = findViewById(R.id.next_date);
         salesList = findViewById(R.id.listView);
         itemsArrayList = new ArrayList<>();
+        back = findViewById(R.id.back);
 
         //initialize the firebase
         db = FirebaseFirestore.getInstance();
@@ -83,6 +85,10 @@ public class Reports extends AppCompatActivity {
                 .setMessage("Please wait")
                 .create();
         dialog.show();
+
+        back.setOnClickListener(v -> {
+            finish();
+        });
 
         //get current date
         LocalDate currentDate = LocalDate.now();
