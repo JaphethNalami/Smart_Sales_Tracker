@@ -10,9 +10,9 @@ public class Constants {
 
     public static final String BASE_URL = "https://sandbox.safaricom.co.ke/";
 
-    public static final String BUSINESS_SHORT_CODE = "4452386";
+    public static final String BUSINESS_SHORT_CODE = "174379";
 
-    public static final String PASSKEY = "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjQwNzIyMTIwMzUz";
+    public static final String PASSKEY = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
 
     public static final String TRANSACTION_TYPE = "CustomerPayBillOnline";
 
