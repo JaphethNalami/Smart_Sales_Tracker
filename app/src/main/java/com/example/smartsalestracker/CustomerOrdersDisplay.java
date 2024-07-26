@@ -25,19 +25,20 @@ import java.util.Objects;
 
 public class CustomerOrdersDisplay extends AppCompatActivity {
 
+    // UI components
     TextView customerName1, customerPhone1;
     ListView listView;
     FloatingActionButton fab;
 
-    //firebase initialisations
-    private FirebaseFirestore db ;
+    // Firebase initializations
+    private FirebaseFirestore db;
     private FirebaseUser user;
     private String userId;
     private FirebaseAuth mAuth;
     String customerPhone, customerName;
     Dialog dialog;
 
-    //listview adapter
+    // ListView adapter
     private ArrayAdapter<String> adapter;
     private ArrayList<String> orderList;
 
@@ -46,56 +47,59 @@ public class CustomerOrdersDisplay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_customer_orders_display);
+
+        // Apply window insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        //get name and phone number from intent
-         customerName = getIntent().getStringExtra("customerName");
-         customerPhone = getIntent().getStringExtra("customerPhone");
+        // Get name and phone number from intent
+        customerName = getIntent().getStringExtra("customerName");
+        customerPhone = getIntent().getStringExtra("customerPhone");
 
-        //initialize views
+        // Initialize views
         customerName1 = findViewById(R.id.customerName);
         customerPhone1 = findViewById(R.id.customerPhoneNumber);
         listView = findViewById(R.id.listView);
         fab = findViewById(R.id.fab);
 
+        // Set up dialog
         dialog = new MaterialAlertDialogBuilder(this)
                 .setView(new ProgressBar(this))
                 .setTitle("Processing Payment")
                 .setMessage("Please wait")
                 .create();
 
-        // Initialize Firestore
+        // Initialize Firebase
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         userId = Objects.requireNonNull(user).getUid();
 
-        //set name and phone number
+        // Set name and phone number in the views
         customerName1.setText(customerName);
         customerPhone1.setText(customerPhone);
 
+        // Initialize order list and adapter
         orderList = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, orderList);
         listView.setAdapter(adapter);
 
-        //set click listener on fab
+        // Set click listener on fab to refresh orders
         fab.setOnClickListener(v -> {
-            //clear orders and call getOrders method
+            // Clear orders and call getOrders method
             listView.setAdapter(null);
             getOrders();
         });
 
-        //call method to get orders
+        // Call method to get orders initially
         getOrders();
     }
 
     private void getOrders() {
-
-        //get orders from firestore using customer phone number as collection name
+        // Get orders from Firestore using customer phone number as collection name
         db.collection(userId).document("Shop").collection("Customers_Orders").document(customerPhone).collection("Orders")
                 .get()
                 .addOnCompleteListener(task -> {
@@ -116,13 +120,8 @@ public class CustomerOrdersDisplay extends AppCompatActivity {
                             String field5 = document.getString("orderDate");
                             String field6 = document.getString("productCategory");
 
-
-                            // Add your fields here according to your document structure
-
-                            // You can then format these fields as per your requirements
-                            String orderInfo = "Category: " + field6 + "\nItem: " + field4 + "\nQuantity: " + field1 + "\nPayment: " + field2 + "\nGender: " + field3 + "\nDate: " + field5 ;
-                            //display the values of orderInfo only in one line
-                            //String orderInfo = "  " + field4 + "    " + field1 + "   " + field2 + "   " + field3;
+                            // Format these fields as per requirements
+                            String orderInfo = "Category: " + field6 + "\nItem: " + field4 + "\nQuantity: " + field1 + "\nPayment: " + field2 + "\nGender: " + field3 + "\nDate: " + field5;
 
                             // Add orderInfo to orderList
                             orderList.add(orderInfo);
@@ -142,23 +141,24 @@ public class CustomerOrdersDisplay extends AppCompatActivity {
                 });
     }
 
+    //fetching orders
+    /*
+    private void getOrders() {
 
-  /*  private void getOrders() {
-
-        //get orders from firestore using customer phone number as collection name
+        // Get orders from Firestore using customer phone number as collection name
         db.collection(userId).document("Shop").collection("Customers_Orders").document(customerPhone).collection("Orders")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        //set adapter to listview
-                       // orderList.clear();
+                        // Set adapter to listView
+                        // orderList.clear();
                         for (int i = 0; i < Objects.requireNonNull(task.getResult()).getDocuments().size(); i++) {
                             orderList.add(Objects.requireNonNull(task.getResult().getDocuments().get(i).getId()));
                         }
                         adapter.notifyDataSetChanged();
                         dialog.dismiss();
                     } else {
-                        //show error message
+                        // Show error message
                         dialog.dismiss();
                         new MaterialAlertDialogBuilder(this)
                                 .setTitle("Error")
@@ -167,5 +167,6 @@ public class CustomerOrdersDisplay extends AppCompatActivity {
                                 .show();
                     }
                 });
-    }*/
+    }
+    */
 }
