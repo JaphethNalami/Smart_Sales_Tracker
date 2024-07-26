@@ -258,6 +258,7 @@ public class CheckoutPage extends AppCompatActivity {
                 phoneHolder.setVisibility(View.VISIBLE);
                 radioGroup1.setVisibility(View.VISIBLE);
             } else {
+                dialog.show();
                // checkout();
                 //customerOrders();
                 //updateQuantities();
@@ -345,7 +346,7 @@ public class CheckoutPage extends AppCompatActivity {
             public void onResponse(@NonNull Call<STKPush> call, @NonNull Response<STKPush> response) {
 
                 // Dismiss progress dialog after API call completes
-                dialog.dismiss();
+
                 try {
                     if (response.isSuccessful()) {
 
@@ -426,7 +427,7 @@ public class CheckoutPage extends AppCompatActivity {
         String order= String.valueOf(cartItems.size());
 
         // Show progress dialog
-        dialog.show();
+
         // Save customer details to the database
         Map<String, Object> customerData = new HashMap<>();
         customerData.put("customerName", customerName);
