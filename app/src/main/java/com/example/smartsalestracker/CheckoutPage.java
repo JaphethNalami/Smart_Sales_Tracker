@@ -2,6 +2,9 @@ package com.example.smartsalestracker;
 
 import static android.content.ContentValues.TAG;
 
+import com.example.smartsalestracker.Services.DarajaApiClient;
+import com.example.smartsalestracker.databinding.ActivityCheckoutPageBinding;
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,12 +34,25 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import com.example.smartsalestracker.Model.AccessToken;
+import com.example.smartsalestracker.Model.STKPush;
+import com.example.smartsalestracker.Services.DarajaApiClient;
+
+
+import retrofit2.Call;
+import timber.log.Timber;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class CheckoutPage extends AppCompatActivity {
 
@@ -51,6 +67,7 @@ public class CheckoutPage extends AppCompatActivity {
     Button checkoutButton;
     EditText amountPaid;
     String gender;
+    String phone_number, amount;
 
     //firebase initialisations
     private FirebaseFirestore db ;
@@ -62,6 +79,9 @@ public class CheckoutPage extends AppCompatActivity {
     String currentDate;
     ArrayList<Product> productArrayList;
     private FirebaseAnalytics mFirebaseAnalytics;
+
+    private DarajaApiClient mApiClient;
+    private ActivityCheckoutPageBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +106,9 @@ public class CheckoutPage extends AppCompatActivity {
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
+        // Initialize Daraja API client
+        mApiClient = new DarajaApiClient();
+        mApiClient.setIsDebug(true);
 
         //progress dialog
         dialog = new MaterialAlertDialogBuilder(this)
@@ -212,6 +235,7 @@ public class CheckoutPage extends AppCompatActivity {
              customerName = Objects.requireNonNull(name.getText()).toString();
              paymentMethod = "";
              gender = "";
+             //get the payment method selected by the user
             if (radioGroup.getCheckedRadioButtonId() == R.id.cash) {
                 paymentMethod = "Cash";
             } else if (radioGroup.getCheckedRadioButtonId() == R.id.mpesa) {
@@ -234,10 +258,13 @@ public class CheckoutPage extends AppCompatActivity {
                 phoneHolder.setVisibility(View.VISIBLE);
                 radioGroup1.setVisibility(View.VISIBLE);
             } else {
-                checkout();
-                customerOrders();
-                updateQuantities();
-                soldProducts();
+               // checkout();
+                //customerOrders();
+                //updateQuantities();
+                //soldProducts();
+                phone_number = phoneNumber;
+                amount = totalTextView.getText().toString();
+                performSTKPush();
 
                 // Log analytics for each item in the cart
                 for (Product product : cartItems) {
@@ -250,7 +277,109 @@ public class CheckoutPage extends AppCompatActivity {
             }
 
         });
+
+        getAccessToken();
     }
+
+// method for getting access token
+    public void getAccessToken() {
+        mApiClient.setGetAccessToken(true);
+        mApiClient.mpesaService().getAccessToken().enqueue(new Callback<AccessToken>() {
+            @Override
+            public void onResponse(@NonNull Call<AccessToken> call, @NonNull Response<AccessToken> response) {
+                if (response.isSuccessful() && response.body() != null) {
+
+                    // Set auth token if request is successful
+                    mApiClient.setAuthToken(response.body().accessToken);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<AccessToken> call, @NonNull Throwable t) {
+                Timber.e(t, "Failed to get access token");
+            }
+        });
+    }
+
+    public void performSTKPush() {
+
+        // Generate encoded password for authentication
+        String timestamp = Utils.getTimestamp();
+        String toEncode = "174379" + "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjQwNzIyMTIwMzUz" + timestamp;
+
+        // Encode password using Base64
+        byte[] byteArray = toEncode.getBytes(StandardCharsets.UTF_8);
+        String encodedPassword;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            encodedPassword = Base64.getEncoder().encodeToString(byteArray);
+        } else {
+            encodedPassword = android.util.Base64.encodeToString(byteArray, android.util.Base64.NO_WRAP);
+        }
+
+        // Create STKPush object with required parameters
+        STKPush stkPush = new STKPush(
+                "174379",  // BusinessShortCode
+                encodedPassword,  // Password
+                timestamp,  // Timestamp
+                "CustomerPayBillOnline",  // TransactionType
+                Integer.parseInt(amount),  // Amount
+                "254715798225",  // PartyA
+                "174379",  // PartyB
+                Utils.sanitizePhoneNumber(phone_number),  // PhoneNumber
+
+
+                "https://mydomain.com/path",  // CallBackURL
+                "Smart Sales Tracker",  // AccountReference
+                "Payment of X"  // TransactionDesc
+        );
+
+        // Disable access token retrieval after first call
+        mApiClient.setGetAccessToken(false);
+
+        // Make API call to perform STK push
+        mApiClient.mpesaService().sendPush(stkPush).enqueue(new Callback<STKPush>() {
+            @Override
+            public void onResponse(@NonNull Call<STKPush> call, @NonNull Response<STKPush> response) {
+
+                // Dismiss progress dialog after API call completes
+                dialog.dismiss();
+                try {
+                    if (response.isSuccessful()) {
+
+                        // Log success message if request is successful
+                        Timber.d("post submitted to API. %s", response.body());
+
+                        checkout();
+                        customerOrders();
+                        updateQuantities();
+                        soldProducts();
+
+
+                    } else {
+                        if (response.errorBody() != null) {
+
+                            // Log error message if request fails
+                            Timber.e("Response %s", response.errorBody().string());
+
+
+                        }
+                    }
+                } catch (Exception e) {
+                    Timber.e(e, "Error processing response");
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<STKPush> call, @NonNull Throwable t) {
+
+                // Dismiss progress dialog if request fails
+                dialog.dismiss();
+                Timber.e(t, "Request failed");
+            }
+        });
+    }
+
+
 //method to save the sold products to the database
     private void soldProducts() {
         for (final Product product : cartItems) {
@@ -288,6 +417,7 @@ public class CheckoutPage extends AppCompatActivity {
         }
     }
 
+    //method to save the customer details to the database
     private void checkout() {
         //get the order number
         String order= String.valueOf(cartItems.size());
