@@ -263,7 +263,10 @@ public class CheckoutPage extends AppCompatActivity {
                 //updateQuantities();
                 //soldProducts();
                 phone_number = phoneNumber;
-                amount = totalTextView.getText().toString();
+
+                //convert total price to integer
+                int totalPrice2= (int) Double.parseDouble(totalPrice1);
+                amount = String.valueOf(totalPrice2);
                 performSTKPush();
 
                 // Log analytics for each item in the cart
