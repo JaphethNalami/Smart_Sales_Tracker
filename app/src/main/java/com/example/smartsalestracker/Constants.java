@@ -16,7 +16,7 @@ public class Constants {
 
     public static final String TRANSACTION_TYPE = "CustomerPayBillOnline";
 
-    public static final String PARTYB = "4452386"; //same as business shortcode above
+    public static final String PARTYB = "174379"; //same as business shortcode above
 
     public static final String CALLBACKURL = "https://mydomain.com/path";
 }

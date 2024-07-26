@@ -309,7 +309,7 @@ public class CheckoutPage extends AppCompatActivity {
 
         // Generate encoded password for authentication
         String timestamp = Utils.getTimestamp();
-        String toEncode = "174379" + "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjQwNzIyMTIwMzUz" + timestamp;
+        String toEncode = "174379" + "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919" + timestamp;
 
         // Encode password using Base64
         byte[] byteArray = toEncode.getBytes(StandardCharsets.UTF_8);

@@ -40,8 +40,8 @@ android {
     }
 
     defaultConfig {
-        buildConfigField("String", "CONSUMER_KEY", "\"hLsQeG9GEDvPNjfaH1x3t3wMcuSKlAIH6jyEJsIRJOtmScKl\"")
-        buildConfigField ("String", "CONSUMER_SECRET", "\"UeJiRo3KHPAsMNGdaKxuDxckG9lNCMFb9T11AD4ZqIM0H8NFlm2EcpwgumzIR3cD\"")
+        buildConfigField("String", "CONSUMER_KEY", "\"4m5aHh8G9mZFpq5sij8jLQUGHUNp5ASVFk1zSUixekPbSfOd\"")
+        buildConfigField ("String", "CONSUMER_SECRET", "\"HMDHlxfBfuVkZlTKa8NDc8TNVolFx4EAPtoztcDc4jMgohhi8K1SqTGUQUJWUtox\"")
         multiDexEnabled = true
     }
 
