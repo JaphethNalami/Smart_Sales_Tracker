@@ -353,6 +353,7 @@ public class CheckoutPage extends AppCompatActivity {
                         // Log success message if request is successful
                         Timber.d("post submitted to API. %s", response.body());
 
+                        //call the methods to save the order to the database
                         checkout();
                         customerOrders();
                         updateQuantities();
