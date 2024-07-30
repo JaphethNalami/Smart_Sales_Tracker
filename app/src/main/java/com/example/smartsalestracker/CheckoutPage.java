@@ -268,7 +268,15 @@ public class CheckoutPage extends AppCompatActivity {
                 //convert total price to integer
                 int totalPrice2= (int) Double.parseDouble(totalPrice1);
                 amount = String.valueOf(totalPrice2);
-                performSTKPush();
+
+                if (paymentMethod.equals("Mpesa")) {
+                    performSTKPush();
+                } else {
+                    checkout();
+                    customerOrders();
+                    updateQuantities();
+                    soldProducts();
+                }
 
                 // Log analytics for each item in the cart
                 for (Product product : cartItems) {
