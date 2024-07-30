@@ -140,33 +140,4 @@ public class CustomerOrdersDisplay extends AppCompatActivity {
                     }
                 });
     }
-
-    //fetching orders
-    /*
-    private void getOrders() {
-
-        // Get orders from Firestore using customer phone number as collection name
-        db.collection(userId).document("Shop").collection("Customers_Orders").document(customerPhone).collection("Orders")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        // Set adapter to listView
-                        // orderList.clear();
-                        for (int i = 0; i < Objects.requireNonNull(task.getResult()).getDocuments().size(); i++) {
-                            orderList.add(Objects.requireNonNull(task.getResult().getDocuments().get(i).getId()));
-                        }
-                        adapter.notifyDataSetChanged();
-                        dialog.dismiss();
-                    } else {
-                        // Show error message
-                        dialog.dismiss();
-                        new MaterialAlertDialogBuilder(this)
-                                .setTitle("Error")
-                                .setMessage("An error occurred while fetching orders")
-                                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
-                                .show();
-                    }
-                });
-    }
-    */
 }
