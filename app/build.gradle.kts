@@ -37,6 +37,7 @@ android {
     buildFeatures {
         viewBinding = true
         buildConfig = true
+        mlModelBinding = true
     }
 
     defaultConfig {
@@ -64,6 +65,7 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.storage)
     implementation(libs.firebase.analytics)
+    implementation(libs.tensorflow.lite.metadata)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -88,4 +90,7 @@ dependencies {
 
     implementation ("com.google.code.gson:gson:2.8.5")
     implementation ("com.squareup.okio:okio:2.1.0")
+
+    implementation ("org.tensorflow:tensorflow-lite:2.6.0")
+    implementation ("org.tensorflow:tensorflow-lite-support:0.1.0")
 }

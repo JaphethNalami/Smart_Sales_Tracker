@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:padding="16dp"
+    tools:context=".Recommender_Page">
+
+  <!-- Title -->
+  <TextView
+      android:id="@+id/title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="TensorFlow Lite Model Prediction"
+      android:textSize="18sp"
+      android:layout_centerHorizontal="true"
+      android:layout_marginBottom="16dp" />
+
+  <!-- Input Field for Age -->
+  <EditText
+      android:id="@+id/age"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Enter age"
+      android:inputType="number"
+      android:layout_below="@id/title"
+      android:layout_marginBottom="8dp" />
+
+  <!-- Input Field for Review Rating -->
+  <EditText
+      android:id="@+id/review_rating"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Enter review rating"
+      android:inputType="numberDecimal"
+      android:layout_below="@id/age"
+      android:layout_marginBottom="8dp" />
+
+  <!-- Input Field for Previous Purchases -->
+  <EditText
+      android:id="@+id/previous_purchases"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Enter previous purchases"
+      android:inputType="number"
+      android:layout_below="@id/review_rating"
+      android:layout_marginBottom="8dp" />
+
+  <!-- Dropdown for Size -->
+  <Spinner
+      android:id="@+id/gender"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/previous_purchases"
+      android:layout_marginBottom="8dp"
+      android:entries="@array/gender_options" />
+
+  <!-- Dropdown for Payment Method -->
+  <Spinner
+      android:id="@+id/payment_method"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/gender"
+      android:layout_marginBottom="16dp"
+      android:entries="@array/payment_method_options" />
+
+  <!-- Button to Trigger Prediction -->
+  <Button
+      android:id="@+id/predictButton"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Predict"
+      android:layout_below="@id/payment_method"
+      android:layout_marginBottom="16dp" />
+
+  <!-- TextView to Display Prediction Result -->
+  <TextView
+      android:id="@+id/predictionResult"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Prediction result will be displayed here"
+      android:textSize="16sp"
+      android:layout_below="@id/predictButton"
+      android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

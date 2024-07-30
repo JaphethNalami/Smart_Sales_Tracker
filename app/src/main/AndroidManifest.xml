@@ -24,7 +24,7 @@
         tools:replace="android:icon"
         tools:targetApi="31" >
         <activity
-            android:name=".AnnouncementManagement"
+            android:name=".Recommender_Page"
             android:exported="false" />
         <activity
             android:name=".RemainingStock"
