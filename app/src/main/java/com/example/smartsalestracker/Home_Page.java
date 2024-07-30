@@ -126,7 +126,7 @@ public class Home_Page extends AppCompatActivity {
 
         //recommender button
         recommender.setOnClickListener(v -> {
-           // startActivity(new Intent(Home_Page.this, Recommender.class));
+            startActivity(new Intent(Home_Page.this, Recommender_Page.class));
         });
 
         //inventory button

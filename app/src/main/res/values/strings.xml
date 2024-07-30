@@ -135,4 +135,15 @@
         <item>Retail</item>
         <item>Wholesale</item>
     </string-array>
+
+    <string-array name="gender_options">
+        <item>Female</item>
+        <item>Male</item>
+
+    </string-array>
+    <string-array name="payment_method_options">
+        <item>Credit Card</item>
+        <item>Cash</item>
+        <item>PayPal</item>
+    </string-array>
 </resources>
