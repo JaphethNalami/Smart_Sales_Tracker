@@ -26,6 +26,10 @@ public class STKPush {
     @SerializedName("TransactionDesc")
     private String transactionDesc;
 
+    // Add CheckoutRequestID
+    @SerializedName("CheckoutRequestID")
+    private String checkoutRequestID;
+
     public STKPush(String businessShortCode, String password, String timestamp, String transactionType,
                    int amount, String partyA, String partyB, String phoneNumber, String callBackURL,
                    String accountReference, String transactionDesc) {
@@ -40,5 +44,14 @@ public class STKPush {
         this.callBackURL = callBackURL;
         this.accountReference = accountReference;
         this.transactionDesc = transactionDesc;
+    }
+
+    // Getters and Setters
+    public String getCheckoutRequestID() {
+        return checkoutRequestID;
+    }
+
+    public void setCheckoutRequestID(String checkoutRequestID) {
+        this.checkoutRequestID = checkoutRequestID;
     }
 }
