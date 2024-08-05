@@ -2,12 +2,16 @@ package com.example.smartsalestracker;
 
 import static android.content.ContentValues.TAG;
 
+import com.example.smartsalestracker.Model.MpesaRequest;
+import com.example.smartsalestracker.Model.STKCallbackResponse;
 import com.example.smartsalestracker.Services.DarajaApiClient;
 import com.example.smartsalestracker.databinding.ActivityCheckoutPageBinding;
 
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -46,6 +50,7 @@ import java.util.Objects;
 import com.example.smartsalestracker.Model.AccessToken;
 import com.example.smartsalestracker.Model.STKPush;
 import com.example.smartsalestracker.Services.DarajaApiClient;
+import com.google.gson.Gson;
 
 
 import retrofit2.Call;
@@ -68,6 +73,7 @@ public class CheckoutPage extends AppCompatActivity {
     EditText amountPaid;
     String gender;
     String phone_number, amount;
+    private String token,encodedPassword,timestamp;
 
     //firebase initialisations
     private FirebaseFirestore db ;
@@ -303,6 +309,9 @@ public class CheckoutPage extends AppCompatActivity {
 
                     // Set auth token if request is successful
                     mApiClient.setAuthToken(response.body().accessToken);
+
+                    // Store token for later use
+                    token = response.body().accessToken;
                 }
             }
 
@@ -316,12 +325,11 @@ public class CheckoutPage extends AppCompatActivity {
     public void performSTKPush() {
 
         // Generate encoded password for authentication
-        String timestamp = Utils.getTimestamp();
+         timestamp = Utils.getTimestamp();
         String toEncode = "174379" + "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919" + timestamp;
 
         // Encode password using Base64
         byte[] byteArray = toEncode.getBytes(StandardCharsets.UTF_8);
-        String encodedPassword;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             encodedPassword = Base64.getEncoder().encodeToString(byteArray);
         } else {
@@ -361,20 +369,20 @@ public class CheckoutPage extends AppCompatActivity {
                         // Log success message if request is successful
                         Timber.d("post submitted to API. %s", response.body());
 
-                        //call the methods to save the order to the database
-                        checkout();
-                        customerOrders();
-                        updateQuantities();
-                        soldProducts();
+                        // Start checking transaction status
+                        assert response.body() != null;
+                        checkTransactionStatus(response.body().getCheckoutRequestID());
 
-
+                        // Display success message
+                        Toast.makeText(CheckoutPage.this, "Request sent. Please complete payment on your phone.", Toast.LENGTH_SHORT).show();
                     } else {
                         if (response.errorBody() != null) {
 
                             // Log error message if request fails
                             Timber.e("Response %s", response.errorBody().string());
 
-
+                            // Display error message
+                            Toast.makeText(CheckoutPage.this, "Error", Toast.LENGTH_SHORT).show();
                         }
                     }
                 } catch (Exception e) {
@@ -388,8 +396,82 @@ public class CheckoutPage extends AppCompatActivity {
                 // Dismiss progress dialog if request fails
                 dialog.dismiss();
                 Timber.e(t, "Request failed");
+
             }
         });
+    }
+
+    public void checkTransactionStatus(String checkoutRequestID) {
+        // Simulate checking transaction status with a delayed task
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Call MpesaRequest to get transaction status
+                MpesaRequest mpesaRequest = new MpesaRequest();
+
+                //get access token from responce body
+
+                mpesaRequest.sendRequest("174379", encodedPassword, timestamp, checkoutRequestID, token, new MpesaRequest.MpesaRequestCallback() {
+                    @Override
+                    public void onSuccess(String response) {
+                        // Handle the response
+                        Log.d("Transaction status response: %s", response);
+                        // Parse the response and handle transaction status
+                        //convert response data to dictionary
+                        Gson gson = new Gson();
+                        STKCallbackResponse stkCallbackResponse = gson.fromJson(response, STKCallbackResponse.class);
+
+                        //if result code is 0, transaction is successful
+                        if (stkCallbackResponse.getResultCode().equals("0")) {
+                            // Handle successful transaction
+                            System.out.println("Transaction successful");
+
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    //save the sold products to the database
+                                    soldProducts();
+                                    //save the customer details to the database
+                                    checkout();
+                                    //save the order to the database
+                                    customerOrders();
+
+                                    //update the quantities
+                                    updateQuantities();
+                                }
+                            });
+
+
+                        } else {
+                            // Handle failed transaction
+                            System.out.println("Transaction failed");
+
+                            //dismiss the progress dialog
+                            dialog.dismiss();
+
+                            //call looper prepare and toast message
+                            Looper.prepare();
+                            Toast.makeText(CheckoutPage.this, "Transaction failed", Toast.LENGTH_SHORT).show();
+                            //display the error
+                            Toast.makeText(CheckoutPage.this, stkCallbackResponse.getResultDesc(), Toast.LENGTH_SHORT).show();
+                            Looper.loop();
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(String error) {
+                        Timber.e("Failed to get transaction status: %s", error);
+
+                        //dismiss the progress dialog
+                        dialog.dismiss();
+
+                    }
+                });
+            }
+        }, 30000); // Check after 30 seconds
     }
 
 
