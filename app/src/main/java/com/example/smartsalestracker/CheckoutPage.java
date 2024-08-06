@@ -370,6 +370,9 @@ public class CheckoutPage extends AppCompatActivity {
                     } else {
                         if (response.errorBody() != null) {
 
+                            //dismiss the progress dialog
+                            dialog.dismiss();
+
                             // Log error message if request fails
                             Timber.e("Response %s", response.errorBody().string());
 
@@ -379,6 +382,9 @@ public class CheckoutPage extends AppCompatActivity {
                     }
                 } catch (Exception e) {
                     Timber.e(e, "Error processing response");
+
+                    //dismiss the progress dialog
+                    dialog.dismiss();
                 }
             }
 
