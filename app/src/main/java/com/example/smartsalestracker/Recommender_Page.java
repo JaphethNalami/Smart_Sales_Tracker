@@ -73,23 +73,65 @@ public class Recommender_Page extends AppCompatActivity {
         predictButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                float ageInput = Float.parseFloat(age.getText().toString());
-                float reviewRatingInput = Float.parseFloat(reviewRating.getText().toString());
-                float previousPurchasesInput = Float.parseFloat(previousPurchases.getText().toString());
+                String ageText = age.getText().toString();
+                String reviewRatingText = reviewRating.getText().toString();
+                String previousPurchasesText = previousPurchases.getText().toString();
                 String genderInput = genderSpinner.getSelectedItem().toString();
                 String paymentMethodInput = paymentMethodSpinner.getSelectedItem().toString();
 
+                // Check for empty input fields
+                if (ageText.isEmpty()) {
+                    Toast.makeText(Recommender_Page.this, "Please enter a valid age", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (reviewRatingText.isEmpty()) {
+                    Toast.makeText(Recommender_Page.this, "Please enter a valid review rating", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (previousPurchasesText.isEmpty()) {
+                    Toast.makeText(Recommender_Page.this, "Please enter a valid number of previous purchases", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (genderInput.isEmpty()) {
+                    Toast.makeText(Recommender_Page.this, "Please select gender", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (paymentMethodInput.isEmpty()) {
+                    Toast.makeText(Recommender_Page.this, "Please select payment method", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Parse the input values
+                float ageInput = Float.parseFloat(ageText);
+                float reviewRatingInput = Float.parseFloat(reviewRatingText);
+                float previousPurchasesInput = Float.parseFloat(previousPurchasesText);
+
+                // Validate the numeric input ranges
+                if (ageInput < 0 || ageInput > 70) {
+                    Toast.makeText(Recommender_Page.this, "Please enter a valid age", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (reviewRatingInput < 0 || reviewRatingInput > 10) {
+                    Toast.makeText(Recommender_Page.this, "Please enter a valid review rating", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (previousPurchasesInput < 0 || previousPurchasesInput > 100) {
+                    Toast.makeText(Recommender_Page.this, "Please enter a valid number of previous purchases", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Create input array for the model
                 float[] input = new float[5];
                 input[0] = ageInput;
                 input[1] = reviewRatingInput;
                 input[2] = previousPurchasesInput;
+                input[3] = encodeGender(genderInput); // Encode gender
+                input[4] = encodePaymentMethod(paymentMethodInput); // Encode payment method
 
-                // Encode categorical variables
-                input[3] = encodeGender(genderInput);
-                input[4] = encodePaymentMethod(paymentMethodInput);
-
+                // Prepare output array for the model prediction
                 float[][] output = new float[1][3]; // Adjust size according to your model
 
+                // Run the model
                 tflite.run(input, output);
 
                 // Handle the output properly
@@ -97,18 +139,51 @@ public class Recommender_Page extends AppCompatActivity {
                 float prediction2 = output[0][1];
                 float prediction3 = output[0][2];
 
-                Random random = new Random();
+                // Round off predictions to 2 decimal places and convert to percentages
+                prediction1 = Math.round(prediction1 * 100.0) / 100.0f;
+                prediction2 = Math.round(prediction2 * 100.0) / 100.0f;
 
-                // Select random products based on predicted values
-                String product1 = productNamesArray[random.nextInt(productNamesArray.length)];
-                String product2 = productNamesArray[random.nextInt(productNamesArray.length)];
-                String product3 = productNamesArray[random.nextInt(productNamesArray.length)];
+                // Multiply by 100 to get percentage and convert to integer
+                int prediction1Int = (int) (prediction1 * 100);
+                int prediction2Int = (int) (prediction2 * 100);
 
-                // Display the results
-                predictionResult.setText("Predictions: " + product1 + ", " + product2 + ", " + product3);
+                // Set the prediction result in the UI
+               // predictionResult.setText("Predictions: " + prediction1Int + "%, " + prediction2Int + "%");
+
+                //display name in string productNamesArray in index 10
+                displayValuesAtIndices(prediction1Int, prediction2Int);
+
+
+
+
+
             }
         });
+
     }
+
+    private void displayValuesAtIndices(int index1, int index2) {
+        StringBuilder displayText = new StringBuilder();
+
+        // Check and display the first index
+        if (index1 >= 0 && index1 < productNamesArray.length) {
+            String value1 = productNamesArray[index1];
+            displayText.append("Prediction ").append("1").append(": ").append(value1).append("\n");
+        } else {
+            displayText.append("Prediction ").append("1").append(" not available\n");
+        }
+
+        // Check and display the second index
+        if (index2 >= 0 && index2 < productNamesArray.length) {
+            String value2 = productNamesArray[index2];
+            displayText.append("Prediction ").append("2").append(": ").append(value2).append("\n");
+        } else {
+            displayText.append("Prediction ").append("2").append(" not available\n");
+        }
+
+        predictionResult.setText(displayText.toString());
+    }
+
 
     private void getProductNames() {
         db.collection(userId).document("Shop").collection("Products").get().addOnCompleteListener(task -> {
