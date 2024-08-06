@@ -19,48 +19,53 @@
 
   <!-- Input Field for Age -->
   <EditText
+      android:background="@drawable/textview_design"
       android:id="@+id/age"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:hint="Enter age"
+      android:layout_height="51dp"
+      android:hint="Enter age up to 70"
       android:inputType="number"
       android:layout_below="@id/title"
       android:layout_marginBottom="8dp" />
 
   <!-- Input Field for Review Rating -->
   <EditText
+      android:background="@drawable/textview_design"
       android:id="@+id/review_rating"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:hint="Enter review rating"
+      android:layout_height="51dp"
+      android:hint="Enter review rating up to 10"
       android:inputType="numberDecimal"
       android:layout_below="@id/age"
       android:layout_marginBottom="8dp" />
 
   <!-- Input Field for Previous Purchases -->
   <EditText
+      android:background="@drawable/textview_design"
       android:id="@+id/previous_purchases"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:hint="Enter previous purchases"
+      android:layout_height="51dp"
+      android:hint="Enter purchases amount up to 100"
       android:inputType="number"
       android:layout_below="@id/review_rating"
       android:layout_marginBottom="8dp" />
 
   <!-- Dropdown for Size -->
   <Spinner
+      android:background="@drawable/spinner_design"
       android:id="@+id/gender"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+      android:layout_height="51dp"
       android:layout_below="@id/previous_purchases"
       android:layout_marginBottom="8dp"
       android:entries="@array/gender_options" />
 
   <!-- Dropdown for Payment Method -->
   <Spinner
+      android:background="@drawable/spinner_design"
       android:id="@+id/payment_method"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+      android:layout_height="51dp"
       android:layout_below="@id/gender"
       android:layout_marginBottom="16dp"
       android:entries="@array/payment_method_options" />
